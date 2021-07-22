@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const LoginPageContainer =  styled.main`
+export const SignUpPageContainer =  styled.main`
     max-width: 100vw;
     height: 100vh;
     display: flex;
@@ -23,4 +23,5 @@ export const InputsContainer = styled.section`
             margin-top: 16px;
         }
     }
+
 `

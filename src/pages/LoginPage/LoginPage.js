@@ -13,12 +13,12 @@ export default function LoginPage() {
 
     const onSubmitLogin = (e) => {
         e.preventDefault()
-        axios.post(`${BASE_URL}/login`)
+        axios.post(`${BASE_URL}/login`, form)
             .then((response) => {
-                localStorage.getItem('token', response.data.token)
+                localStorage.setItem('token', response.data.token)
             })
             .catch((err) => {
-                alert('E-mail ou senha incorretos')
+                alert(err.response.data.message)
             })
     }
     return (
@@ -41,13 +41,14 @@ export default function LoginPage() {
                         id="outlined-basic"
                         label="Senha"
                         variant="outlined"
+                        margin={'normal'}
                         name={'password'}
                         type={'password'}
                         value={form.password}
                         onChange={onChangeForm}
                         required
                     />
-                    <Button variant="contained" color="primary">Login</Button>
+                    <Button variant="contained" color="primary" type={'submit'}>Login</Button>
                 </form>
                 <Button color="primary">Ainda não tem uma conta? Registre-se!</Button>
             </InputsContainer>
