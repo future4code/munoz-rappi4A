@@ -5,7 +5,7 @@ export const useForm = (initialState) => {
 
     const onChangeForm = (e) => {
         const {name, value} = e.target
-        setForm[{...form, [name]: value}]
+        setForm({...form, [name]: value})
     }
 
     const clearInputs = () => {
