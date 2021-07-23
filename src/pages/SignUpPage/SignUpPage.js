@@ -6,7 +6,7 @@ import React from "react"
 import { InputsContainer, SignUpPageContainer } from "./styled"
 import { useHistory } from "react-router-dom"
 import { goToAddressPage, goToLoginPage } from "../../routes/coordinator"
-import useUnprotectedPage from "../../hooks/useProtectedPage";
+import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 
 
 export default function SignUpPage() {
