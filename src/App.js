@@ -1,15 +1,15 @@
 import React from "react";
+import { Header } from "./components/Header/Header";
 import Router from "./routes/Router";
 
-function App() {
+const App = () => {
   return (
-    <div>
+    <>
+      <Header showBackBtn={false} title={"Rappi4"} />
       <Router />
-      {/* <Header showBackBtn={false} title={"Rappi4"} />
-      <h1>Teste</h1>
-*/}
-    </div>
+    </>
   );
-}
+};
 
 export default App;
+
