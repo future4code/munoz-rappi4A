@@ -4,8 +4,14 @@ import { BASE_URL } from "../../constants/urls"
 import { useForm } from "../../hooks/useForm"
 import React from "react"
 import { InputsContainer, SignUpPageContainer } from "./styled"
+import { useHistory } from "react-router-dom"
+import { goToAddressPage, goToLoginPage } from "../../routes/coordinator"
+import useUnprotectedPage from "../../hooks/useProtectedPage";
+
 
 export default function SignUpPage() {
+    useUnprotectedPage()
+    const history = useHistory()
     const { form, onChangeForm, clearInputs } = useForm({
         name: '',
         email: '',
@@ -18,8 +24,8 @@ export default function SignUpPage() {
         axios.post(`${BASE_URL}/signup`, form)
             .then((response) => {
                 localStorage.setItem('token', response.data.token)
-                console.log(response)
                 clearInputs()
+                goToAddressPage(history)
             })
             .catch((err) => {
                 alert(err.response.data.message)
@@ -76,9 +82,9 @@ export default function SignUpPage() {
                         onChange={onChangeForm}
                         required
                     />
-                    <Button variant="contained" color="primary" type={'submit'}>Registre-se!</Button>
+                    <Button variant="contained" color="primary" type={'submit'}>Salvar</Button>
                 </form>
-                <Button color="primary">Ja tem conta? Faça Login!</Button>
+                <Button onClick={() => goToLoginPage(history)} color="primary">Ja tem conta? Faça Login!</Button>
             </InputsContainer>
         </SignUpPageContainer>
     )
