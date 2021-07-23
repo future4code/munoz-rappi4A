@@ -1,29 +1,54 @@
 import { Button, TextField } from "@material-ui/core";
+import axios from "axios";
 import React from "react";
 import { Header } from "../../components/Header/Header";
+import { BASE_URL } from "../../constants/urls";
+import { useForm } from "../../hooks/useForm";
 import {
   AddressPageContainer,
   InputsContainer,
   TittleAddress,
 } from "./address.style";
 export default function AddAddressPage() {
+  const { form, onChangeForm, clearInputs } = useForm({
+    street: '',
+    number: '',
+    neighbourhood: '',
+    city: '',
+    state: '',
+    complement: '',
+  })
+  const token = localStorage.getItem('token')
+  const submitAddress = (e) => {
+    e.preventDefault()
+    axios.put(`${BASE_URL}/address`, form, {
+      headers:{
+        auth: token,
+      }
+    }).then((response)=> {
+      localStorage.setItem('token', response.data.token)
+    })
+    .catch((error)=> {
+      alert(error.response.data)
+    })
+  }
   return (
     <div>
       <Header showBackBtn={true} />
       <TittleAddress>Meu Endereço</TittleAddress>
       <AddressPageContainer>
         <InputsContainer>
-          <form>
+          <form onSubmit={submitAddress}>
             <TextField
               id="outlined-basic"
               label="Logradouro"
               placeholder={"Rua / Av."}
               variant="outlined"
               margin={"normal"}
-              name={"name"}
+              name={"street"}
               type={"text"}
-              //   value={form.name}
-              //   onChange={onChangeForm}
+              value={form.street}
+              onChange={onChangeForm}
               required
             />
 
@@ -35,8 +60,8 @@ export default function AddAddressPage() {
               name={"number"}
               type={"number"}
               placeholder={"Número"}
-              //   value={form.email}
-              //   onChange={onChangeForm}
+              value={form.number}
+              onChange={onChangeForm}
               required
             />
             <TextField
@@ -45,12 +70,9 @@ export default function AddAddressPage() {
               placeholder={"Apto. / Bloco"}
               variant="outlined"
               margin={"normal"}
-              name={"complemento"}
-              //   inputProps={{ pattern: "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" }}
-
-              //   value={form.cpf}
-              //   onChange={onChangeForm}
-              required
+              name={"complement"}
+              value={form.complement}
+              onChange={onChangeForm}
             />
             <TextField
               id="outlined-basic"
@@ -58,10 +80,10 @@ export default function AddAddressPage() {
               placeholder={"Bairro"}
               variant="outlined"
               margin={"normal"}
-              name={"bairro"}
+              name={"neighbourhood"}
               type={"text"}
-              //   value={form.password}
-              //   onChange={onChangeForm}
+              value={form.neighbourhood}
+              onChange={onChangeForm}
               required
             />
             <TextField
@@ -70,10 +92,10 @@ export default function AddAddressPage() {
               placeholder={"Cidade"}
               variant="outlined"
               margin={"normal"}
-              name={"cidade"}
+              name={"city"}
               type={"text"}
-              //   value={form.password}
-              //   onChange={onChangeForm}
+              value={form.city}
+              onChange={onChangeForm}
               required
             />
             <TextField
@@ -82,10 +104,10 @@ export default function AddAddressPage() {
               placeholder={"Estado"}
               variant="outlined"
               margin={"normal"}
-              name={"estado"}
+              name={"state"}
               type={"text"}
-              //   value={form.password}
-              //   onChange={onChangeForm}
+              value={form.state}
+              onChange={onChangeForm}
               required
             />
             <Button variant="contained" color="primary" type={"submit"}>
