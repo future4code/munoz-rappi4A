@@ -5,8 +5,9 @@ export const HeaderContainer = styled.header`
   align-items: center;
   grid-template-columns: 1fr 175px 1fr;
   height: 44px;
-  width: 360px;
-  margin: 0 0 16px;
+  /* width: 360px; */
+  width: 100%;
+  /* margin: 0 0 16px; */
   padding: 0 16px 10px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);

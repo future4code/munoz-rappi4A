@@ -5,7 +5,7 @@ import Router from "./routes/Router";
 const App = () => {
   return (
     <>
-      <Header showBackBtn={false} title={"Rappi4"} />
+      {/* <Header showBackBtn={false} title={"Rappi4"} /> */}
       <Router />
     </>
   );
