@@ -29,7 +29,7 @@ export function Header(props) {
   return (
     <HeaderContainer>
       {props.showBackBtn ?
-        <img src={BackButton} alt="logo" onClick={() => goToPreviousPage(history)}/>
+        <img src={BackButton} alt="logo" onClick={goToPreviousPage}/>
         :
         <div></div>
 
