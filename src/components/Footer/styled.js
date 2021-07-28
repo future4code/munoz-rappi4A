@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const MdlMiniFooter = styled.footer`
   width: 100%;
-  height: 81px;
+  height: 60px;
   position: absolute;
   bottom: 0;
   left: 0;
   border-top: 2px solid #BDBDBD;
+  background-color: white;
 `;
 
 export const ListsIcons = styled.ul`
