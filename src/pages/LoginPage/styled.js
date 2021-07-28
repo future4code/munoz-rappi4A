@@ -22,8 +22,6 @@ export const InputsContainer = styled.section`
     }
     button {
       margin-top: 16px;
-      background-color: #e86e5a;
-      color: black;
     }
   }
 `;

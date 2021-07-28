@@ -86,7 +86,7 @@ export default function SignUpPage() {
             Salvar
           </Button>
         </form>
-        <Button onClick={() => goToLoginPage(history)} color="black">
+        <Button onClick={() => goToLoginPage(history)} color="primary">
           Ja tem conta? Faça Login!
         </Button>
       </InputsContainer>
