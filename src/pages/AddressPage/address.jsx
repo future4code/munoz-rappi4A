@@ -27,6 +27,7 @@ export default function AddAddressPage() {
       }
     }).then((response)=> {
       localStorage.setItem('token', response.data.token)
+      clearInputs();
     })
     .catch((error)=> {
       alert(error.response.data)

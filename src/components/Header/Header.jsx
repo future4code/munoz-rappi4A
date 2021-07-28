@@ -15,7 +15,7 @@ export function Header(props) {
   return (
     <HeaderContainer>
       {props.showBackBtn ?
-        <img src={BackButton} onClick={goToPreviousPage}/>
+        <img src={BackButton} alt="logo" onClick={goToPreviousPage}/>
         :
         <div></div>
       }

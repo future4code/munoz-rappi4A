@@ -58,7 +58,7 @@ export default function LoginPage() {
                     />
                     <Button variant="contained" color="primary" type={'submit'}>Login</Button>
                 </form>
-                <Button onClick={() => goToSignUpPage(history)} color="primary">Ainda não tem uma conta? Registre-se!</Button>
+                <Button onClick={() => goToSignUpPage(history)} color="black">Ainda não tem uma conta? Registre-se!</Button>
             </InputsContainer>
         </LoginPageContainer>
     )
