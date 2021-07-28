@@ -9,7 +9,13 @@ import {
   InputsContainer,
   TittleAddress,
 } from "./address.style";
+import { useHistory } from "react-router-dom"
+import { goToLoginPage } from "../../routes/coordinator"
+import useUnprotectedPage from "../../hooks/useUnprotectedPage";
+
 export default function AddAddressPage() {
+  useUnprotectedPage();
+  const history = useHistory();
   const { form, onChangeForm, clearInputs } = useForm({
     street: '',
     number: '',
@@ -27,6 +33,8 @@ export default function AddAddressPage() {
       }
     }).then((response)=> {
       localStorage.setItem('token', response.data.token)
+      clearInputs();
+      goToLoginPage(history)
     })
     .catch((error)=> {
       alert(error.response.data)
