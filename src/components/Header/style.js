@@ -12,8 +12,12 @@ export const HeaderContainer = styled.header`
   backdrop-filter: blur(10px);
   box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
+  img{
+    cursor: pointer;
+  }
 `
 
 export const Title = styled.p`
   text-align: center;
+  cursor: pointer;
 `

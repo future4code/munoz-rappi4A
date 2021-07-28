@@ -2,7 +2,8 @@ import { Button, TextField } from "@material-ui/core"
 import axios from "axios"
 import { BASE_URL } from "../../constants/urls"
 import { useForm } from "../../hooks/useForm"
-import React from "react"
+import React, { useContext } from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
 import { LoginPageContainer, InputsContainer } from "./styled"
 import { useHistory } from "react-router-dom"
 import { goToFeedPage, goToSignUpPage } from "../../routes/coordinator"
@@ -12,6 +13,8 @@ import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 export default function LoginPage() {
     useUnprotectedPage()
     const history = useHistory()
+    const { setLogout } =
+    useContext(GlobalStateContext);
     const { form, onChangeForm, clearInputs } = useForm({
         email: '',
         password: ''
@@ -24,6 +27,7 @@ export default function LoginPage() {
                 localStorage.setItem('token', response.data.token)
                 clearInputs()
                 goToFeedPage(history)
+                setLogout("Sair")
             })
             .catch((err) => {
                 alert(err.response.data.message)

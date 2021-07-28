@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "../../assets/logo.svg";
 import { ContainerApp, AppHeader, AppLogo } from "./styled";
-import { useHistory } from "react-router-dom"
-import { goToLoginPage } from "../../routes/coordinator"
+import { useHistory } from "react-router-dom";
+import { goToLoginPage } from "../../routes/coordinator";
+
 
 const LogoPage = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <ContainerApp>
@@ -14,6 +15,6 @@ const LogoPage = () => {
       </AppHeader>
     </ContainerApp>
   );
-}
+};
 
 export default LogoPage;
