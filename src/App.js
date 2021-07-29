@@ -1,5 +1,4 @@
 import React from "react";
-import { Header } from "./components/Header/Header";
 import Router from "./routes/Router";
 import GlobalState from "./global/GlobalState";
 import theme from "./constants/themes";
@@ -9,7 +8,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalState>
-        <Header showBackBtn={false} title={"Rappi4"} />
         <Router />
       </GlobalState>
     </ThemeProvider>

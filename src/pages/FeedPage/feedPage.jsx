@@ -17,14 +17,14 @@ import {
   SearchIconStyle,
 } from "./feedPage.style";
 import { Container } from "@material-ui/core";
-import Footer from "../../components/Footer/Footer";
+import { Footer } from "../../components/Footer/Footer";
 
 const FeedPage = () => {
   useProtectedPage();
   return (
     <>
       <Header showBackBtn={false} title={"Rappi4"} />
-      <Container>
+      <Container style={{maxHeight: 500, overflow: 'auto'}}>
         <ContainerBusca>
           <TextField
             id="input-with-icon-textfield"
@@ -106,6 +106,7 @@ const FeedPage = () => {
           </CardContentStyle>
         </CardActionArea>
       </Container>
+      <Footer />
     </>
   );
 };
