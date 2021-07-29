@@ -21,6 +21,7 @@ export function Header(props) {
     if (token) {
       logoutItem();
       setLogout("");
+      goToLoginPage(history)
     }
   };
 
