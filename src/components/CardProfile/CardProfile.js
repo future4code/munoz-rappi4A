@@ -2,6 +2,9 @@ import React from "react";
 import { useRequestData } from "../../hooks/useRequestData";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
+import { goToEditProfilePage, goToEditAddressPage } from "../../routes/coordinator";
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {
@@ -23,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CardProfile = () => {
+  const history = useHistory();
   const classes = useStyles();
   const token = localStorage.getItem("token");
   const { data: profile, loading } = useRequestData("/profile", token);
@@ -61,7 +65,7 @@ const CardProfile = () => {
                 </Typography>{" "}
               </CardContent>
               <CardContent style={{ gridColumnEnd: "span 1" }}>
-                <CreateOutlinedIcon className={classes.icon} />
+                <CreateOutlinedIcon className={classes.icon} onClick={() => goToEditProfilePage(history)}/>
               </CardContent>
             </Card>
 
@@ -82,7 +86,7 @@ const CardProfile = () => {
                 </Typography>{" "}
               </CardContent>
               <CardContent style={{ gridColumnEnd: "span 1" }}>
-                <CreateOutlinedIcon className={classes.icon} />
+                <CreateOutlinedIcon className={classes.icon} onClick={() => goToEditAddressPage(history)}/>
               </CardContent>
             </Card>
           </div>
