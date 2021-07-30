@@ -58,7 +58,7 @@ const ProfilePage = () => {
   const classes = useStyles();
   const history = useHistory()
   const token = localStorage.getItem('token')
-  useProtectedPage(history, token);
+  useProtectedPage();
   return (
     <div>
       <Header title={"Meu Perfil"} />

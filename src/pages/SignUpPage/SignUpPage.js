@@ -11,7 +11,7 @@ import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 export default function SignUpPage() {
   const history = useHistory()
   const token = localStorage.getItem('token')
-  useUnprotectedPage(history, token)
+  useUnprotectedPage()
   const { form, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",

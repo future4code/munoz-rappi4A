@@ -16,7 +16,7 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 export default function AddAddressPage() {
   const history = useHistory()
   const token = localStorage.getItem('token')
-  useProtectedPage(history, token);
+  useProtectedPage();
   const { form, onChangeForm, clearInputs } = useForm({
     street: '',
     number: '',
