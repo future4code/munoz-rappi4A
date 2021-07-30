@@ -4,7 +4,6 @@ import { goToLoginPage } from "../routes/coordinator";
 
 const useProtectedPage = (history, token) => {
   useLayoutEffect(() => {
-    
     if (!token) {
       goToLoginPage(history);
     }

@@ -14,6 +14,7 @@ import {
   ListItemText,
   Divider,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {
@@ -55,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfilePage = () => {
   const classes = useStyles();
-
-  useProtectedPage();
+  const history = useHistory()
+  const token = localStorage.getItem('token')
+  useProtectedPage(history, token);
   return (
     <div>
       <Header title={"Meu Perfil"} />
