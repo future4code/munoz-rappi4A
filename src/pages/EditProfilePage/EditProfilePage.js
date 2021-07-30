@@ -2,36 +2,48 @@ import { Button, TextField } from "@material-ui/core";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useForm } from "../../hooks/useForm";
-import React from "react";
+import React, { useEffect } from "react";
 import { InputsContainer, SignUpPageContainer } from "./styled";
 import { useHistory } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { goToProfilePage } from "../../routes/coordinator";
 import useProtectedPage from "../../hooks/useProtectedPage";
+import { useRequestData } from "../../hooks/useRequestData";
 
 const EditProfilePage = () => {
   useProtectedPage();
   const history = useHistory();
-  const { form, onChangeForm, clearInputs } = useForm({
+  const token = localStorage.getItem("token");
+  const { data: profile, loading } = useRequestData("/profile", token);
+  const { form, setForm, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",
     cpf: "",
   });
 
+  useEffect(() => {
+    if (profile) {
+      setForm({
+        name: profile.user.name,
+        email: profile.user.email,
+        cpf: profile.user.cpf,
+      });
+    }
+  }, [profile]);
+
   const onSubmitEditProfile = (e) => {
     e.preventDefault();
     axios
-      .put(`${BASE_URL}/profile`, form)
+      .put(`${BASE_URL}/profile`, form, { headers: { auth: token } })
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
         clearInputs();
         goToProfilePage(history);
       })
       .catch((err) => {
         alert(err.response.data.message);
-        console.log(err.response.data.message);
       });
   };
+
   return (
     <>
       <Header showBackBtn={true} title={"Editar"} />
