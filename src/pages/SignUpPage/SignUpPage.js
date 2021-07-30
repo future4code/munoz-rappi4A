@@ -9,8 +9,9 @@ import { goToAddressPage, goToLoginPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 
 export default function SignUpPage() {
-  useUnprotectedPage();
-  const history = useHistory();
+  const history = useHistory()
+  const token = localStorage.getItem('token')
+  useUnprotectedPage()
   const { form, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",

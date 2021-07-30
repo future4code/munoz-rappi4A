@@ -2,7 +2,7 @@ import React from 'react'
 import useProtectedPage from "../../hooks/useProtectedPage";
 
 const RestaurantListPage = () => {
-    useProtectedPage();
+    // useProtectedPage();
     return (
         <div>
             <h1>RestaurantListPage</h1>
