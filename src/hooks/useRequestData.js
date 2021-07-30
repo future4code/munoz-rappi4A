@@ -9,7 +9,7 @@ export const useRequestData = (path, token) => {
     useEffect(() => {
         axios.get(`${BASE_URL}${path}`, {
             headers: {
-                Authorization: token,
+                auth: token,
             }
 
         })
