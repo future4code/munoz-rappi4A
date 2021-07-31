@@ -9,7 +9,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalState>
-        <Header showBackBtn={false} title={"Rappi4"} />
+        {/* <Header showBackBtn={false} title={"Rappi4"} /> */}
         <Router />
       </GlobalState>
     </ThemeProvider>
