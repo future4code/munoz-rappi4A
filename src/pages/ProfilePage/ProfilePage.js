@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import CardOrders from "../../components/CardOrders/CardOrders";
 import CardProfile from "../../components/CardProfile/CardProfile";
+import CardAddress from "../../components/CardAddress/CardAddress";
 
 const useStyles = makeStyles((theme) => ({
   listHistory: {
@@ -33,6 +34,7 @@ const ProfilePage = () => {
       <Header title={"Meu Perfil"} />
       <Container style={{ maxHeight: 500, overflow: "auto" }}>
         <CardProfile />
+        <CardAddress />
         <List className={classes.listHistory}>
           <ListItem>
             <ListItemText
@@ -50,4 +52,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
