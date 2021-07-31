@@ -22,6 +22,5 @@ export const useRequestData = (path, token) => {
         setLoading(false);
       });
   }, [path]);
-
   return { data, loading };
 };
