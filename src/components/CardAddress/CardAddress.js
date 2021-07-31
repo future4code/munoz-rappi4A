@@ -2,7 +2,7 @@ import React from "react";
 import { useRequestData } from "../../hooks/useRequestData";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
-import { goToEditProfilePage } from "../../routes/coordinator";
+import { goToEditAddressPage } from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardProfile = () => {
+const CardAddress = () => {
   const history = useHistory();
   const classes = useStyles();
   const token = localStorage.getItem("token");
   const { data: profile, loading } = useRequestData("/profile", token);
 
-  const renderProfile = () => {
+  const renderAddress = () => {
     return (
       <div>
         {loading && <p>Carregando...</p>}
@@ -41,32 +41,36 @@ const CardProfile = () => {
               style={{ border: "none", boxShadow: "none" }}
             >
               <CardContent style={{ gridColumnEnd: "span 11" }}>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  className={classes.text}
-                >
-                  {profile.user.name}
+                <Typography variant="h6" component="h2" color="textSecondary">
+                  Endereço Cadastrado
                 </Typography>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  className={classes.text}
-                >
-                  {profile.user.email}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  className={classes.text}
-                >
-                  {profile.user.cpf}
-                </Typography>{" "}
+
+                {profile.user.hasAddress === true ? (
+                  <>
+                    <Typography
+                      variant="h6"
+                      component="h2"
+                      className={classes.text}
+                    >
+                      {profile.user.address}
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Typography
+                      variant="h6"
+                      component="h2"
+                      className={classes.text}
+                    >
+                      Atualize o seu endereço
+                    </Typography>
+                  </>
+                )}
               </CardContent>
               <CardContent style={{ gridColumnEnd: "span 1" }}>
                 <CreateOutlinedIcon
                   className={classes.icon}
-                  onClick={() => goToEditProfilePage(history)}
+                  onClick={() => goToEditAddressPage(history)}
                 />
               </CardContent>
             </Card>
@@ -76,7 +80,7 @@ const CardProfile = () => {
     );
   };
 
-  return <div>{renderProfile()}</div>;
+  return <div>{renderAddress()}</div>;
 };
 
-export default CardProfile;
+export default CardAddress;
