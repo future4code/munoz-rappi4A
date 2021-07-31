@@ -8,6 +8,8 @@ import FeedPage from "../pages/FeedPage/feedPage.jsx";
 import RestaurantListPage from "../pages/RestaurantListPage/RestaurantListPage";
 import CartPage from "../pages/CartPage/CartPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import EditProfilePage from "../pages/EditProfilePage/EditProfilePage";
+import EditAddressPage from "../pages/EditAddressPage/EditAddressPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const Router = () => {
@@ -37,6 +39,12 @@ const Router = () => {
         </Route>
         <Route exact path="/meu-perfil">
           <ProfilePage />
+        </Route>
+        <Route exact path="/meu-perfil/editar-perfil">
+          <EditProfilePage />
+        </Route>
+        <Route exact path="/meu-perfil/editar-endereco">
+          <EditAddressPage />
         </Route>
         <Route>
           <ErrorPage />
