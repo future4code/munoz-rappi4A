@@ -1,5 +1,6 @@
-import React from 'react'
+import React from "react";
 import { Header } from '../../components/Header/Header';
+import { Footer } from "../../components/Footer/Footer";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
 
@@ -223,7 +224,7 @@ const renderCards = mockGetRestaurantDetails.restaurant.products.map((product) =
 })
 
 const CartPage = () => {
-  useProtectedPage();
+  // useProtectedPage();
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
@@ -237,8 +238,10 @@ const CartPage = () => {
         <p>{mockGetRestaurantDetails.restaurant.deliveryTime + ' min'}</p>
       </RestaurantDetails>
       {renderCards}
+      <Footer />
     </DeviceContainer>
   )
 }
 
-export default CartPage
+
+export default CartPage;

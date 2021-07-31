@@ -1,52 +1,64 @@
 import { Button, TextField } from "@material-ui/core";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "../../components/Header/Header";
 import { BASE_URL } from "../../constants/urls";
 import { useForm } from "../../hooks/useForm";
-import {
-  AddressPageContainer,
-  InputsContainer,
-  TittleAddress,
-} from "./address.style";
-import { useHistory } from "react-router-dom"
-import { goToLoginPage } from "../../routes/coordinator"
+import { AddressPageContainer, InputsContainer } from "./styled";
+import { useHistory } from "react-router-dom";
+import { goToProfilePage } from "../../routes/coordinator";
 import useProtectedPage from "../../hooks/useProtectedPage";
+import { useRequestData } from "../../hooks/useRequestData";
 
-export default function AddAddressPage() {
-  const history = useHistory()
-  const token = localStorage.getItem('token')
+const EditAddressPage = () => {
   useProtectedPage();
-  const { form, onChangeForm, clearInputs } = useForm({
-    street: '',
-    number: '',
-    neighbourhood: '',
-    city: '',
-    state: '',
-    complement: '',
-  })
-  const submitAddress = (e) => {
-    e.preventDefault()
-    axios.put(`${BASE_URL}/address`, form, {
-      headers:{
-        auth: token,
-      }
-    }).then((response)=> {
-      localStorage.setItem('token', response.data.token)
-      clearInputs();
-      goToLoginPage(history)
-    })
-    .catch((error)=> {
-      alert(error.response.data)
-    })
-  }
+  const token = localStorage.getItem("token");
+  const history = useHistory();
+  const { data: profile, loading } = useRequestData("/profile/address", token);
+  const { form, setForm, onChangeForm, clearInputs } = useForm({
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    complement: "",
+  });
+
+  useEffect(() => {
+    if (profile) {
+      setForm({
+        street: profile.address.street,
+        number: profile.address.number,
+        neighbourhood: profile.address.neighbourhood,
+        city: profile.address.city,
+        state: profile.address.state,
+        complement: profile.address.complement,
+      });
+    }
+  }, [profile]);
+
+  const submitEditAddress = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${BASE_URL}/address`, form, {
+        headers: {
+          auth: token,
+        },
+      })
+      .then((response) => {
+        clearInputs();
+        goToProfilePage(history);
+      })
+      .catch((error) => {
+        alert(error.response.data);
+      });
+  };
   return (
     <div>
-      <Header showBackBtn={true} />
-      <TittleAddress>Meu Endereço</TittleAddress>
+      <Header showBackBtn={true} title={"Endereço"} />
       <AddressPageContainer>
         <InputsContainer>
-          <form onSubmit={submitAddress}>
+          <form onSubmit={submitEditAddress}>
             <TextField
               id="outlined-basic"
               label="Logradouro"
@@ -59,6 +71,7 @@ export default function AddAddressPage() {
               onChange={onChangeForm}
               required
             />
+
             <TextField
               id="outlined-basic"
               label="Número"
@@ -125,4 +138,5 @@ export default function AddAddressPage() {
       </AddressPageContainer>
     </div>
   );
-}
+};
+export default EditAddressPage;

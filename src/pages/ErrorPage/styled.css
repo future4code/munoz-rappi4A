@@ -1,6 +1,6 @@
 .error-container {
   text-align: center;
-  font-size: 180px;
+  font-size: 150px;
   font-family: "Catamaran", sans-serif;
   font-weight: 800;
   margin: 20px 15px;
@@ -134,10 +134,11 @@ h1 {
 button.more-link {
   text-transform: uppercase;
   font-size: 13px;
-  background-color: #92a4ad;
+  background-color: #e86e5a;
   padding: 10px 15px;
-  border-radius: 0;
-  color: #416475;
+  border-radius: 5px;
+  border-style: none;
+  color: white;
   display: inline-block;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -145,5 +146,11 @@ button.more-link {
   text-decoration: none;
   margin-top: 50px;
   letter-spacing: 1px;
+  cursor: pointer;
+}
+
+button.more-link:hover {
+  background-color: transparent;
+  color: black;
   cursor: pointer;
 }

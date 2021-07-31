@@ -1,3 +1,7 @@
+export const goToLogoPage = (history) => {
+    history.push("/")
+}
+
 export const goToLoginPage = (history) => {
     history.push("/login")
 }
@@ -24,4 +28,12 @@ export const goToCartPage = (history) => {
 
 export const goToProfilePage = (history) => {
     history.push("/meu-perfil")
+}
+
+export const goToEditProfilePage = (history) => {
+    history.push("/meu-perfil/editar-perfil")
+}
+
+export const goToEditAddressPage = (history) => {
+    history.push("/meu-perfil/editar-endereco")
 }
