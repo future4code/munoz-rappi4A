@@ -11,8 +11,9 @@ import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 
 
 export default function LoginPage() {
-    useUnprotectedPage()
     const history = useHistory()
+    const token = localStorage.getItem('token')
+    useUnprotectedPage()
     const { setLogout } =
     useContext(GlobalStateContext);
     const { form, onChangeForm, clearInputs } = useForm({

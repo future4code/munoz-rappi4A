@@ -4,6 +4,7 @@ import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import BackButton from "../../assets/back.svg";
 import { HeaderContainer, Title } from "./style";
+import { goToLoginPage } from "../../routes/coordinator";
 
 export function Header(props) {
   const history = useHistory();
@@ -21,6 +22,7 @@ export function Header(props) {
     if (token) {
       logoutItem();
       setLogout("");
+      goToLoginPage(history)
     }
   };
 
