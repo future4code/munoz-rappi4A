@@ -3,13 +3,14 @@ import { useLayoutEffect } from "react";
 import { goToFeedPage } from "../routes/coordinator";
 
 const useUnprotectedPage = () => {
-  const history = useHistory();
+  const history = useHistory()
+  const token = localStorage.getItem('token')
+
   useLayoutEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       goToFeedPage(history);
     }
-  }, [history]);
+  }, [token]);
 };
 
 export default useUnprotectedPage;

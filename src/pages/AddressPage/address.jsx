@@ -11,11 +11,12 @@ import {
 } from "./address.style";
 import { useHistory } from "react-router-dom"
 import { goToLoginPage } from "../../routes/coordinator"
-import useUnprotectedPage from "../../hooks/useUnprotectedPage";
+import useProtectedPage from "../../hooks/useProtectedPage";
 
 export default function AddAddressPage() {
-  useUnprotectedPage();
-  const history = useHistory();
+  const history = useHistory()
+  const token = localStorage.getItem('token')
+  useProtectedPage();
   const { form, onChangeForm, clearInputs } = useForm({
     street: '',
     number: '',
@@ -24,7 +25,6 @@ export default function AddAddressPage() {
     state: '',
     complement: '',
   })
-  const token = localStorage.getItem('token')
   const submitAddress = (e) => {
     e.preventDefault()
     axios.put(`${BASE_URL}/address`, form, {
@@ -59,7 +59,6 @@ export default function AddAddressPage() {
               onChange={onChangeForm}
               required
             />
-
             <TextField
               id="outlined-basic"
               label="Número"
