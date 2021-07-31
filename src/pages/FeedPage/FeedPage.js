@@ -25,6 +25,7 @@ import Hamburguer from "../../assets/foto-hamburguer.jpg";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useRequestData } from "../../hooks/useRequestData";
+import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -36,30 +37,7 @@ const FeedPage = () => {
     data &&
     data.restaurants &&
     data.restaurants.map((restaurant, index) => {
-      return (
-        <CardActionArea>
-          <CardMediaStyle
-            component={"img"}
-            alt={restaurant.category}
-            image={restaurant.logoUrl}
-            title={restaurant.name}
-            height="150px"
-          />
-          <CardContentStyle>
-            <NameRestaurant gutterBottom variant="h5" component="h2">
-              {restaurant.name}
-            </NameRestaurant>
-            <ContainerInfos>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {`${restaurant.deliveryTime}min`}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {`Frete R$${restaurant.shipping},00`}
-              </Typography>
-            </ContainerInfos>
-          </CardContentStyle>
-        </CardActionArea>
-      );
+      return <CardRestaurants restaurant={restaurant} />;
     });
 
   let typesOfFood =
