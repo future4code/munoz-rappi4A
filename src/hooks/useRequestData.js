@@ -18,7 +18,7 @@ export const useRequestData = (path, token) => {
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err.response.data)
+                console.log("Não rolou", err)
                 setLoading(false);
             })
     }, [path])
