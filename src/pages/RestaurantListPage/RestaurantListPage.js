@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { CartCard } from '../../components/CartCard/CartCard';
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from '../../hooks/useRequestData';
+import { Header } from '../../components/Header/Header'
+import { Footer } from '../../components/Footer/Footer'
+import { RestaurantMenu } from './styled';
 
 const RestaurantListPage = () => {
     useProtectedPage();
@@ -18,27 +22,17 @@ const RestaurantListPage = () => {
     console.log(restaurant)
 
     return (
-        <div>
-            <h1>RestaurantListPage</h1>
-            {/* {restaurant ?
-                showMenu() :
-                !loading && <p>Este Restaurante ainda não tem pratos disponíveis :(</p>} */}
+        <RestaurantMenu>
+            <Header title={restaurant && restaurant.name} />
             {
-                restaurant &&
-                restaurant.products.map((product) => {
-                    console.log(product.name)
-                    return (
-                        <div key={product.id}>
-                            <h1>{product.name}</h1>
-                            <p>{product.description}</p>
-                            <img src={product.photoUrl} alt={product.name} />
-                            <p>R$ {product.price},00</p>
-                            <hr />
-                        </div>
-                    )
-                })
+                restaurant ?
+                    restaurant.products.map((product) => {
+                        return <CartCard product={product} key={product.id} />
+                    }) :
+                    !loading && <p>Este Restaurante ainda não tem pratos disponíveis :(</p>
             }
-        </div>
+            <Footer />
+        </RestaurantMenu>
     )
 }
 

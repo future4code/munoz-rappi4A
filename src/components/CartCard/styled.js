@@ -10,7 +10,6 @@ export const Card = styled.div`
   border: solid 1px #b8b8b8;
   overflow: hidden;
   display: flex;
-  
 `
 
 export const ImageContainer = styled.div`
@@ -24,6 +23,10 @@ export const ImageContainer = styled.div`
 export const InfoBox = styled.div`
   position: relative;
   width: calc(100% - 97px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 8px;
 `
 
 export const QuantityBox = styled.div`
