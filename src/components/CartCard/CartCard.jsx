@@ -1,12 +1,15 @@
 import React from 'react'
 import { Card, ImageContainer, InfoBox, QuantityBox, RemoveButton } from './styled'
 
-export const CartCard = (props) => {
+export const CartCard = ({product}) => {
   return (
-    <Card key={props.product.id}>
-      <ImageContainer image={props.product.photoUrl} />
+    <Card key={product.id}>
+      <ImageContainer image={product.photoUrl} />
       <InfoBox>
         <QuantityBox>2</QuantityBox>
+        <h4>{product.name}</h4>
+        <p>{product.description}</p>
+        <p>R$ {product.price.toFixed(2)}</p>
         <RemoveButton>remover</RemoveButton>
       </InfoBox>
     </Card>
