@@ -1,16 +1,18 @@
 import React from 'react'
-import { Card, ImageContainer, InfoBox, QuantityBox, RemoveButton } from './styled'
+import { formatPrice } from '../../utils/formatPrice'
+import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, RemoveButton } from './styled'
+
 
 export const CartCard = ({product}) => {
   return (
     <Card key={product.id}>
       <ImageContainer image={product.photoUrl} />
       <InfoBox>
-        <QuantityBox>2</QuantityBox>
-        <h4>{product.name}</h4>
-        <p>{product.description}</p>
-        <p>R$ {product.price.toFixed(2)}</p>
-        <RemoveButton>remover</RemoveButton>
+        <ProductTitle>{props.product.name}</ProductTitle>
+        <ProductDescription>{props.product.description}</ProductDescription>
+        <ProductPrice>{formatPrice(props.product.price)}</ProductPrice>
+        <QuantityBox>{props.product.quantity}</QuantityBox>
+        <RemoveButton onClick={() => props.removeItemFromCart(props.product.id)}>remover</RemoveButton>
       </InfoBox>
     </Card>
   )

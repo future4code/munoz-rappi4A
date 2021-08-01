@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
 
-import { DeliverAddress, DeviceContainer, ImageContainer, InfoBox, QuantityBox, RemoveButton, RestaurantDetails } from './styled'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+
+import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
+import { formatPrice } from "../../utils/formatPrice";
 
 const mockGetFullAddress = {
   "address": {
@@ -127,14 +135,16 @@ const mockGetRestaurantDetails = {
     "products": [
       {
         "id": "3vcYYSOEf8dKeTPd7vHe",
+        "quantity": 1,
         "description": "Pastel autêntico, feito na hora!",
         "name": "Pastel",
         "category": "Pastel",
         "price": 3,
-        "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031408_66194519.jpg"
+        "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031408_66194519.jpg",
       },
       {
         "id": "5omTFSOBYiTqeiDwhiBx",
+        "quantity": 2,
         "price": 1,
         "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031403_66194479.jpg",
         "name": "Bibsfiha queijo",
@@ -143,6 +153,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "5qVBu990QDEcBPOzitMy",
+        "quantity": 1,
         "name": "Kibe",
         "description": "Kibe árabe de verdade",
         "category": "Salgado",
@@ -151,6 +162,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "6ZNrnQB0CgCZHf31xCRu",
+        "quantity": 1,
         "category": "Lanche",
         "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031424_66194598.jpg",
         "price": 22.9,
@@ -159,6 +171,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "8CKulpHeAAm1QQqWpReI",
+        "quantity": 1,
         "name": "Batata Frita",
         "price": 9.5,
         "description": "Batata frita crocante e sequinha.",
@@ -167,6 +180,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "KqHR80VJp9my0eBLEHvk",
+        "quantity": 1,
         "name": "Pizza",
         "category": "Pizza",
         "description": "Pizza crocante de diversos sabores",
@@ -175,6 +189,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "XHhajKAtvIH2Dq6F83PX",
+        "quantity": 1,
         "name": "Suco",
         "category": "Bebida",
         "price": 7.9,
@@ -183,6 +198,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "bEj2JorVLWo86iJf7OF9",
+        "quantity": 1,
         "price": 4,
         "photoUrl": "https://static-images.ifood.com.br/image/upload/t_medium/pratos/f62f7746-4888-4e81-a9b0-93bf5453c51a/202103180149_woHq_s.jpg",
         "category": "Bebida",
@@ -191,6 +207,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "fMMfstMTxeos8NWTS4j1",
+        "quantity": 1,
         "category": "Salgado",
         "description": "Esfiha deliciosa, receita secreta do Habibs.",
         "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907151009_76679579.jpg",
@@ -199,6 +216,7 @@ const mockGetRestaurantDetails = {
       },
       {
         "id": "xhq0QgZXklGSmaBDy6KQ",
+        "quantity": 1,
         "description": "Esfiha deliciosa, receita secreta do Habibs.",
         "category": "Salgado",
         "name": "Bibsfiha carne",
@@ -217,19 +235,54 @@ const mockGetRestaurantDetails = {
   }
 }
 
-const renderCards = mockGetRestaurantDetails.restaurant.products.map((product) => {
-  return (
-    <CartCard product={product}/>
-  )
-})
+
 
 const CartPage = () => {
   // useProtectedPage();
+
+  const [cart, setCart] = useState(mockGetRestaurantDetails.restaurant.products)
+  const [totalCart, setTotalCart] = useState(0)
+  const [paymentMethod, setPaymentMethod] = useState("dinheiro")
+  console.log("CART:", cart);
+  console.log("PAGAMENTO:", paymentMethod);
+
+  const handlePaymentMethod = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+
+  const calculateTotalCart = () => {
+    let total = 0
+    cart.forEach((item) => {
+      total += item.price * item.quantity
+    })
+    setTotalCart(formatPrice(total));
+  }
+
+  const removeItemFromCart = (id) => {
+    const newCart = cart.filter((item) => {
+      if (item.id === id) {
+        return false
+      }
+      return true
+    })
+    setCart(newCart);
+  }
+
+  useEffect(() => {
+    calculateTotalCart()
+  })
+
+  const renderCards = cart.map((product) => {
+    return (
+      <CartCard product={product} removeItemFromCart={removeItemFromCart} />
+    )
+  })
+
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
       <DeliverAddress>
-        <h3>Endereço de Entrega</h3>
+        <p>Endereço de Entrega</p>
         <p>{mockGetFullAddress.address.street + ', ' + mockGetFullAddress.address.number}</p>
       </DeliverAddress>
       <RestaurantDetails>
@@ -238,6 +291,23 @@ const CartPage = () => {
         <p>{mockGetRestaurantDetails.restaurant.deliveryTime + ' min'}</p>
       </RestaurantDetails>
       {renderCards}
+      <ShippingContainer>
+        <p>Frete: {formatPrice(mockGetRestaurantDetails.restaurant.shipping)}</p>
+      </ShippingContainer>
+      <TotalContainer>
+        <p>SUBTOTAL</p>
+        <TotalValue>{totalCart}</TotalValue>
+      </TotalContainer>
+      <PaymentMethodContainer>
+        <p>Forma de pagamento</p>
+        <FormControl component="fieldset">
+          <RadioGroup aria-label="forma-de-pagamento" name="forma-de-pagamento" value={paymentMethod} onChange={handlePaymentMethod}>
+            <FormControlLabel value="dinheiro" control={<Radio />} label="Dinheiro" />
+            <FormControlLabel value="credito" control={<Radio />} label="Cartão de Crédito" />
+          </RadioGroup>
+        </FormControl>
+      </PaymentMethodContainer>
+      <ButtonLarge>Confirmar</ButtonLarge>
       <Footer />
     </DeviceContainer>
   )

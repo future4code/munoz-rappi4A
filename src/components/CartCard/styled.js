@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const Card = styled.div`
   width: 328px;
   height: 112px;
-  margin: 1px 0 0;
+  margin: 4px 0;
   /* padding: 0 0 0 113px; */
   border-radius: 8px;
   border: solid 1px #b8b8b8;
@@ -23,10 +23,27 @@ export const ImageContainer = styled.div`
 export const InfoBox = styled.div`
   position: relative;
   width: calc(100% - 97px);
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-left: 8px;
+  justify-content: center ;
+
+`
+
+export const ProductTitle = styled.p`
+  color: #e86e5a;
+  letter-spacing: -0.39px;
+`
+
+export const ProductDescription = styled.p`
+  font-size: 14px;
+  color: #b8b8b8;
+  letter-spacing: -0.34px;
+`
+
+export const ProductPrice = styled.p`
+  color: #000;
+  letter-spacing: -0.39px;
 `
 
 export const QuantityBox = styled.div`
