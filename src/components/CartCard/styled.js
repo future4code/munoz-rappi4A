@@ -10,7 +10,6 @@ export const Card = styled.div`
   border: solid 1px #b8b8b8;
   overflow: hidden;
   display: flex;
-  
 `
 
 export const ImageContainer = styled.div`

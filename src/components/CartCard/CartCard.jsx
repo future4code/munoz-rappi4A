@@ -3,10 +3,10 @@ import { formatPrice } from '../../utils/formatPrice'
 import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, RemoveButton } from './styled'
 
 
-export const CartCard = (props) => {
+export const CartCard = ({product}) => {
   return (
-    <Card key={props.product.id}>
-      <ImageContainer image={props.product.photoUrl} />
+    <Card key={product.id}>
+      <ImageContainer image={product.photoUrl} />
       <InfoBox>
         <ProductTitle>{props.product.name}</ProductTitle>
         <ProductDescription>{props.product.description}</ProductDescription>
