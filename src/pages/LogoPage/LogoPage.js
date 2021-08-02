@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import { ContainerApp, AppHeader, AppLogo } from "./styled";
 import { useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import { goToLoginPage } from "../../routes/coordinator";
 
 const LogoPage = () => {
   const history = useHistory();
+
 
   return (
     <ContainerApp>
