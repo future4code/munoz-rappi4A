@@ -11,6 +11,7 @@ export const AddressPageContainer = styled.main`
 export const TittleAddress = styled.h4`
   justify-content: center;
   display: flex;
+  margin: 5vw;
 `;
 
 export const InputsContainer = styled.section`

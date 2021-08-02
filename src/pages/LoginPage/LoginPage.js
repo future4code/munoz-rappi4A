@@ -8,6 +8,8 @@ import { LoginPageContainer, InputsContainer } from "./styled";
 import { useHistory } from "react-router-dom";
 import { goToFeedPage, goToLogoPage, goToSignUpPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
+import LogoHeader from "../../components/LogoHeader/LogoHeader"
+
 
 export default function LoginPage() {
   const history = useHistory();
@@ -36,6 +38,7 @@ export default function LoginPage() {
   };
   return (
     <LoginPageContainer>
+      <LogoHeader />
       <InputsContainer>
         <form onSubmit={onSubmitLogin}>
           <TextField
@@ -47,6 +50,7 @@ export default function LoginPage() {
             type={"email"}
             value={form.email}
             onChange={onChangeForm}
+            autoFocus
             required
           />
 
