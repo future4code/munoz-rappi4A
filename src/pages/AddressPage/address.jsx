@@ -57,6 +57,7 @@ export default function AddAddressPage() {
               type={"text"}
               value={form.street}
               onChange={onChangeForm}
+              autoFocus
               required
             />
             <TextField
