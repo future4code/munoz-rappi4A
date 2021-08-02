@@ -11,9 +11,7 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: "repeat(12, 1fr)",
     borderShadow: "white",
     margin: "8px",
-    "&:hover": {
-      backgroundColor: "#EEEEEE",
-    },
+    backgroundColor: "#EEEEEE",
   },
   icon: {
     cursor: "pointer",
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardAddress = () => {
+const CardAddress = (props) => {
   const history = useHistory();
   const classes = useStyles();
   const token = localStorage.getItem("token");
@@ -68,10 +66,14 @@ const CardAddress = () => {
                 )}
               </CardContent>
               <CardContent style={{ gridColumnEnd: "span 1" }}>
-                <CreateOutlinedIcon
-                  className={classes.icon}
-                  onClick={() => goToEditAddressPage(history)}
-                />
+                {props.showEditBtn ? (
+                  <CreateOutlinedIcon
+                    className={classes.icon}
+                    onClick={() => goToEditAddressPage(history)}
+                  />
+                ) : (
+                  <div></div>
+                )}
               </CardContent>
             </Card>
           </div>

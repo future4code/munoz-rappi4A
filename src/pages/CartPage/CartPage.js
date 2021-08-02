@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
+import CardAddress from '../../components/CardAddress/CardAddress';
+
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
 
@@ -13,17 +15,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
-
-const mockGetFullAddress = {
-  "address": {
-    "neighbourhood": "Vila N. Conceição",
-    "number": "177",
-    "city": "São Paulo",
-    "apartment": null,
-    "state": "SP",
-    "street": "R. Afonso Braz"
-  }
-}
 
 const mockGetRestaurants = {
   "restaurants": [
@@ -281,10 +272,7 @@ const CartPage = () => {
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
-      <DeliverAddress>
-        <p>Endereço de Entrega</p>
-        <p>{mockGetFullAddress.address.street + ', ' + mockGetFullAddress.address.number}</p>
-      </DeliverAddress>
+      <CardAddress showEditBtn={false} />
       <RestaurantDetails>
         <h3>{mockGetRestaurantDetails.restaurant.name}</h3>
         <p>{mockGetRestaurantDetails.restaurant.address}</p>
