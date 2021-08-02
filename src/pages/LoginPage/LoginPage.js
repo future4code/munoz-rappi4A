@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { LoginPageContainer, InputsContainer } from "./styled";
 import { useHistory } from "react-router-dom";
-import { goToFeedPage, goToSignUpPage } from "../../routes/coordinator";
+import { goToFeedPage, goToLogoPage, goToSignUpPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 
 export default function LoginPage() {
