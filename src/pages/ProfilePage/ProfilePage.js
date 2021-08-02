@@ -34,7 +34,7 @@ const ProfilePage = () => {
       <Header title={"Meu Perfil"} />
       <Container style={{ maxHeight: 500, overflow: "auto" }}>
         <CardProfile />
-        <CardAddress />
+        <CardAddress showEditBtn={true}/>
         <List className={classes.listHistory}>
           <ListItem>
             <ListItemText
