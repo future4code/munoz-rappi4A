@@ -6,6 +6,10 @@ const theme = createMuiTheme({
       main: "#e86e5a",
       constrastText: "black",
     },
+    secondary: {
+      main: "#ffffff",
+      constrastText: "#c0c0c0",
+    },
   },
 });
 
