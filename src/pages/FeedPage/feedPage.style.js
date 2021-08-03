@@ -24,8 +24,8 @@ export const ContainerTiposComida = styled.div`
 `;
 export const TiposDeComida = styled.p`
   margin-right: 20px;
-
-  :hover {
+  cursor: pointer;
+  :hover{
     border-bottom: 2px rgb(232, 110, 90) solid;
     color: rgb(232, 110, 90);
   }

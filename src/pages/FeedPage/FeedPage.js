@@ -17,16 +17,30 @@ import {
 } from "./feedPage.style";
 import searchIcon from "../../assets/search.svg";
 import { useRequestData } from "../../hooks/useRequestData";
+import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
 
 const FeedPage = () => {
+  useProtectedPage();
   const [filtered, setFiltered] = useState(false);
   const [RestaurantesFiltrados, setRestaurantesFiltrados] = useState([]);
-  useProtectedPage();
+  const { form, onChangeForm } = useForm({
+    search: ""
+})
   const token = localStorage.getItem("token");
-  const { data } = useRequestData("/restaurants", token);
-  console.log(data);
+  const { data, loading } = useRequestData("/restaurants", token);
+  // console.log(data);
+
+  const searchResult = form.search && data.restaurants?.filter((item) => {
+    return item.name.toLowerCase().includes(form.search.toLowerCase())
+    })
+
+  let nameRestaurants =
+    form.search && searchResult.length > 0 ?
+    searchResult?.map((restaurant, index) => {
+      return <CardRestaurants restaurant={restaurant} />;
+    }) : form.search && !searchResult.length && <p>Busca não coincide com nenhum restaurante :(</p>
 
   let listRestaurants =
     data &&
@@ -34,6 +48,7 @@ const FeedPage = () => {
     data.restaurants.map((restaurant, index) => {
       return <CardRestaurants restaurant={restaurant} height="150px" />;
     });
+
   const filteredTypes = [];
   let typesOfFood =
     data &&
@@ -83,6 +98,10 @@ const FeedPage = () => {
             <TextField
               id="input-with-icon-textfield"
               placeholder="Restaurantes"
+              type="text"
+              onChange={onChangeForm}
+              value={form.search}
+              name={"search"}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start"></InputAdornment>
@@ -95,7 +114,8 @@ const FeedPage = () => {
             <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
           </ContainerTodosTipos>
           <CardActionArea>
-            {filtered ? renderRestaurants : listRestaurants || <Loading />}
+            {loading && <Loading />}
+            {filtered ? renderRestaurants : nameRestaurants || listRestaurants}
           </CardActionArea>
         </Container>
       </>
