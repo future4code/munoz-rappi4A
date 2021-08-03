@@ -19,6 +19,7 @@ import searchIcon from "../../assets/search.svg";
 import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
+import Loading from "../../components/Loading/Loading";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -45,7 +46,7 @@ const FeedPage = () => {
     data &&
     data.restaurants &&
     data.restaurants.map((restaurant, index) => {
-      return <CardRestaurants restaurant={restaurant} />;
+      return <CardRestaurants restaurant={restaurant} height="150px" />;
     });
 
   const filteredTypes = [];
@@ -58,10 +59,6 @@ const FeedPage = () => {
         filteredTypes[restaurant.category] = [];
         filteredTypes[restaurant.category].push(restaurant);
       }
-      // } else if (restaurant.category === filteredTypes[restaurant.category]) {
-      //   filteredTypes[restaurant.category].push(restaurant);
-      // }
-      // console.log("VAMO VER: ", filteredTypes);
 
       return (
         <ContainerTiposComida
@@ -117,7 +114,7 @@ const FeedPage = () => {
             <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
           </ContainerTodosTipos>
           <CardActionArea>
-            {loading && <p>Opa! deu ruim</p>}
+            {loading && <Loading />}
             {filtered ? renderRestaurants : nameRestaurants || listRestaurants}
           </CardActionArea>
         </Container>
