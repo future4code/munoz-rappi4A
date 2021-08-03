@@ -21,4 +21,8 @@ export const ContainerTiposComida = styled.div`
 `;
 export const TiposDeComida = styled.p`
   margin-right: 20px;
+  cursor: pointer;
+  &:hover{
+    color: #e86e5a;
+  }
 `;
