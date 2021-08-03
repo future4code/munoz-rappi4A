@@ -18,6 +18,7 @@ import {
 import searchIcon from "../../assets/search.svg";
 import { useRequestData } from "../../hooks/useRequestData";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
+import Loading from "../../components/Loading/Loading";
 
 const FeedPage = () => {
   const [filtered, setFiltered] = useState(false);
@@ -31,7 +32,7 @@ const FeedPage = () => {
     data &&
     data.restaurants &&
     data.restaurants.map((restaurant, index) => {
-      return <CardRestaurants restaurant={restaurant} />;
+      return <CardRestaurants restaurant={restaurant} height="150px" />;
     });
   const filteredTypes = [];
   let typesOfFood =
@@ -43,10 +44,6 @@ const FeedPage = () => {
         filteredTypes[restaurant.category] = [];
         filteredTypes[restaurant.category].push(restaurant);
       }
-      // } else if (restaurant.category === filteredTypes[restaurant.category]) {
-      //   filteredTypes[restaurant.category].push(restaurant);
-      // }
-      // console.log("VAMO VER: ", filteredTypes);
 
       return (
         <ContainerTiposComida
@@ -98,7 +95,7 @@ const FeedPage = () => {
             <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
           </ContainerTodosTipos>
           <CardActionArea>
-            {filtered ? renderRestaurants : listRestaurants || "Opa! deu ruim"}
+            {filtered ? renderRestaurants : listRestaurants || <Loading />}
           </CardActionArea>
         </Container>
       </>
