@@ -3,31 +3,25 @@ import {
   Container,
   InputAdornment,
   TextField,
-  Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import {
-  CardContentStyle,
-  CardMediaStyle,
   ContainerBusca,
-  ContainerInfos,
   ContainerTiposComida,
   ContainerTodosTipos,
-  NameRestaurant,
   SearchIconStyle,
   TiposDeComida,
 } from "./feedPage.style";
 import searchIcon from "../../assets/search.svg";
-import Hamburguer from "../../assets/foto-hamburguer.jpg";
-import axios from "axios";
-import { BASE_URL } from "../../constants/urls";
 import { useRequestData } from "../../hooks/useRequestData";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 
 const FeedPage = () => {
+  const [filtered, setFiltered] = useState(false);
+  const [RestaurantesFiltrados, setRestaurantesFiltrados] = useState([]);
   useProtectedPage();
   const token = localStorage.getItem("token");
   const { data } = useRequestData("/restaurants", token);
@@ -39,20 +33,50 @@ const FeedPage = () => {
     data.restaurants.map((restaurant, index) => {
       return <CardRestaurants restaurant={restaurant} />;
     });
-
+  const filteredTypes = [];
   let typesOfFood =
     data &&
     data.restaurants &&
-    data.restaurants.map((type, index) => {
+    data.restaurants.map((restaurant) => {
+      if (restaurant.category !== filteredTypes[restaurant.category]) {
+        filteredTypes.push(restaurant.category);
+        filteredTypes[restaurant.category] = [];
+        filteredTypes[restaurant.category].push(restaurant);
+      }
+      // } else if (restaurant.category === filteredTypes[restaurant.category]) {
+      //   filteredTypes[restaurant.category].push(restaurant);
+      // }
+      // console.log("VAMO VER: ", filteredTypes);
+
       return (
-        <ContainerTiposComida>
+        <ContainerTiposComida
+          onClick={() => onClickCategorias(restaurant.category)}
+        >
           <TiposDeComida>
-            <strong>{type.category}</strong>
+            <strong>{restaurant.category}</strong>
           </TiposDeComida>
         </ContainerTiposComida>
       );
     });
 
+  const filteredRestaurants = [];
+  const onClickCategorias = (selectCategory) => {
+    data.restaurants.forEach((restaurant) => {
+      if (restaurant.category === selectCategory) {
+        console.log(restaurant);
+        filteredRestaurants.push(restaurant);
+      }
+    });
+
+    console.log(filteredRestaurants);
+    setFiltered(true);
+    setRestaurantesFiltrados(filteredRestaurants);
+  };
+  console.log(RestaurantesFiltrados);
+
+  const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
+    return <CardRestaurants restaurant={restaurant} />;
+  });
   return (
     <div>
       <>
@@ -73,7 +97,9 @@ const FeedPage = () => {
           <ContainerTodosTipos>
             <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
           </ContainerTodosTipos>
-          <CardActionArea>{listRestaurants || "Opa! deu ruim"}</CardActionArea>
+          <CardActionArea>
+            {filtered ? renderRestaurants : listRestaurants || "Opa! deu ruim"}
+          </CardActionArea>
         </Container>
       </>
       <Footer />
