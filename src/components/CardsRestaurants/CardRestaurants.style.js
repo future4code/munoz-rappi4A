@@ -3,12 +3,14 @@ import styled from "styled-components";
 
 export const CardContentStyle = styled(CardContent)`
   border: solid 1px gray;
-  height: 60px;
+  height: 90px;
 `;
 
 export const CardMediaStyle = styled(CardMedia)`
   && {
-    margin-top: 10px;
+    margin-top: 20px;
+    height: 120px;
+    border: solid 1px gray;
   }
 `;
 
