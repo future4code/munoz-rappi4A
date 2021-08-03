@@ -6,7 +6,7 @@ export const MdlMiniFooter = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
-  border-top: 2px solid #BDBDBD;
+  border-top: 2px solid #bdbdbd;
   background-color: white;
 `;
 
