@@ -5,8 +5,8 @@ import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from '../../hooks/useRequestData';
 import { Header } from '../../components/Header/Header'
 import { Footer } from '../../components/Footer/Footer'
-import { RestaurantMenu } from './styled';
-import { TiposDeComida } from '../FeedPage/feedPage.style';
+import { ContainerTiposComida, RestaurantMenu } from './styled';
+import { TiposDeComida } from './styled';
 
 const RestaurantListPage = () => {
     useProtectedPage();
@@ -46,12 +46,13 @@ const RestaurantListPage = () => {
                     categories[0].products.push(product)
                 }
             })
-            setReady(true)
+            setProducts(categories)
+            // setReady(true)
     }, [restaurant])
-    useEffect(()=>{
-        console.log("entrou", categories)
-        setProducts(categories)
-    }, [ready])
+    // useEffect(()=>{
+    //     console.log("entrou", categories)
+    //     setProducts(...products, categories)
+    // }, [ready])
     console.log("products",products)
     return (
         <RestaurantMenu>
@@ -70,7 +71,7 @@ const RestaurantListPage = () => {
                     products.map((category) => {
                         return (
                             <>
-                                {category.products.length>0 && <TiposDeComida>{category.name}</TiposDeComida>}
+                                {category.products.length>0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
                                 {category.products.map((product) => {
                                     console.log("mapa de produtos")
                                     return <CartCard product={product} key={product.id} />
