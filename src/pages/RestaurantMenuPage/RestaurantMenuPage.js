@@ -8,7 +8,7 @@ import { Footer } from '../../components/Footer/Footer'
 import { ContainerTiposComida, RestaurantMenu } from './styled';
 import { TiposDeComida } from './styled';
 
-const RestaurantListPage = () => {
+const RestaurantMenuPage = () => {
     useProtectedPage();
     const token = localStorage.getItem('token')
     const pathParams = useParams()
