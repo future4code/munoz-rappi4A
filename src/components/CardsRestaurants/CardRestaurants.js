@@ -1,5 +1,7 @@
 import { CardActionArea, Typography } from "@material-ui/core";
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { goToRestaurantMenuPage } from "../../routes/coordinator";
 import {
   CardContentStyle,
   CardMediaStyle,
@@ -8,8 +10,10 @@ import {
 } from "./CardRestaurants.style";
 
 export default function CardRestaurants({ restaurant }) {
+  const history = useHistory();
+
   return (
-    <CardActionArea>
+    <CardActionArea onClick={() => goToRestaurantMenuPage(history, restaurant.id)}>
       <CardMediaStyle
         component={"img"}
         alt={restaurant.category}

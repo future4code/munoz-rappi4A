@@ -7,14 +7,38 @@ import { Header } from '../../components/Header/Header'
 import { Footer } from '../../components/Footer/Footer'
 import { ContainerTiposComida, RestaurantMenu } from './styled';
 import { TiposDeComida } from './styled';
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, MenuItem, FormControl, Select } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 250,
+    borderRadius: 4,
+    border: "1px solid #ced4da"
+  },
+  formButton: {
+    color: "#5094E3",
+    '&:hover': {
+      color: "#e86e5a",
+   },
+  }
+}));
 
 const RestaurantMenuPage = () => {
     useProtectedPage();
+    const classes = useStyles();
     const token = localStorage.getItem('token')
     const pathParams = useParams()
     const { data, loading } = useRequestData(`/restaurants/${pathParams.id}`, token)
     const [restaurant, setRestaurant] = useState()
     const [products, setProducts] = useState()
+    const [open, setOpen] = useState(false);
+    const [quantity, setQuantity] = useState("");
 
     useEffect(() => {
         if (data) {
@@ -46,9 +70,29 @@ const RestaurantMenuPage = () => {
         }
     }, [data])
 
+    const handleOpen = () => {
+      setOpen(true);
+    }
+
+    const addItemToCart = (id) => {
+    }
+
+    const handleChange = (event) => {
+      setQuantity(Number(event.target.value) || "");
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const handleClick = () => {
+      handleClose(); 
+      addItemToCart();
+    }
+
     return (
         <RestaurantMenu>
-            <Header title={restaurant && restaurant.name} />
+            <Header title={restaurant && restaurant.name} showBackBtn={true} />
             {
                 restaurant && products ?
                     products.map((category) => {
@@ -56,7 +100,7 @@ const RestaurantMenuPage = () => {
                             <div key={category.name}>
                                 {category.products.length>0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
                                 {category.products.map((product) => {
-                                    return <CartCard product={product} key={product.id} />
+                                    return <CartCard product={product} key={product.id} actionCartBtn={true} handleOpen={handleOpen} />
                                 })}
                             </div>
                         )
@@ -64,8 +108,38 @@ const RestaurantMenuPage = () => {
                     !loading && <p>Este Restaurante ainda não tem pratos disponíveis :(</p>
             }
             <Footer />
+            <div>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Selecione a quantidade desejada</DialogTitle>
+                <DialogContent>
+                  <form className={classes.container}>
+                    <FormControl className={classes.formControl}>
+                      <Select
+                        labelId="demo-dialog-select-label"
+                        id="demo-dialog-select"
+                        value={quantity}
+                        onChange={handleChange}
+                        input={<Input />}
+                      >
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </form>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClick} className={classes.formButton}>
+                    ADICIONAR AO CARRINHO
+                  </Button>
+                </DialogActions>
+              </Dialog>
+          </div>
         </RestaurantMenu>
     )
 }
 
-export default RestaurantListPage
+export default RestaurantMenuPage
