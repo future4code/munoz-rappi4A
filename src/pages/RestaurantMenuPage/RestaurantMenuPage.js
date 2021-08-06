@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     border: "1px solid #ced4da"
   },
+  title: {
+    fontSize: "15px",
+    textAlignLast: "center",
+    fontWeight: 'bold',
+    marginTop: "10px",
+  },
   formButton: {
     color: "#5094E3",
     '&:hover': {
@@ -110,7 +116,7 @@ const RestaurantMenuPage = () => {
             <Footer />
             <div>
               <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Selecione a quantidade desejada</DialogTitle>
+                <DialogTitle disableTypography="true"  className={classes.title}>Selecione a quantidade desejada</DialogTitle>
                 <DialogContent>
                   <form className={classes.container}>
                     <FormControl className={classes.formControl}>
@@ -119,7 +125,7 @@ const RestaurantMenuPage = () => {
                         id="demo-dialog-select"
                         value={quantity}
                         onChange={handleChange}
-                        input={<Input />}
+                        disableUnderline={true}
                       >
                         <MenuItem value={0}>0</MenuItem>
                         <MenuItem value={1}>1</MenuItem>
