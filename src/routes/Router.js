@@ -5,7 +5,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import AddressPage from "../pages/AddressPage/address";
 import FeedPage from "../pages/FeedPage/FeedPage";
-import RestaurantListPage from "../pages/RestaurantListPage/RestaurantListPage";
+import RestaurantMenuPage from "../pages/RestaurantMenuPage/RestaurantMenuPage";
 import CartPage from "../pages/CartPage/CartPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import EditProfilePage from "../pages/EditProfilePage/EditProfilePage";
@@ -32,7 +32,7 @@ const Router = () => {
           <FeedPage />
         </Route>
         <Route exact path="/restaurante/:id">
-          <RestaurantListPage />
+          <RestaurantMenuPage />
         </Route>
         <Route exact path="/meu-carrinho">
           <CartPage />
