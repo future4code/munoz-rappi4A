@@ -48,7 +48,7 @@ const RestaurantMenuPage = () => {
 
     return (
         <RestaurantMenu>
-            <Header title={restaurant && restaurant.name} />
+            <Header title={restaurant && restaurant.name} showBackBtn={true} />
             {
                 restaurant && products ?
                     products.map((category) => {
@@ -68,4 +68,4 @@ const RestaurantMenuPage = () => {
     )
 }
 
-export default RestaurantListPage
+export default RestaurantMenuPage
