@@ -18,8 +18,8 @@ export const goToFeedPage = (history) => {
     history.push("/home")
 }
 
-export const goToRestaurantListPage = (history) => {
-    history.push("/restaurante/id")
+export const goToRestaurantMenuPage = (history, id) => {
+    history.push(`/menu-restaurante/${id}`)
 }
 
 export const goToCartPage = (history) => {

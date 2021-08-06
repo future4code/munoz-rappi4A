@@ -265,7 +265,7 @@ const CartPage = () => {
 
   const renderCards = cart.map((product) => {
     return (
-      <CartCard product={product} removeItemFromCart={removeItemFromCart} />
+      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false}/>
     )
   })
 
