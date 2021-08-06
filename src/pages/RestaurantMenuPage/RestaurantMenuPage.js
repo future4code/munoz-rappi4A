@@ -34,6 +34,7 @@ const RestaurantMenuPage = () => {
   useProtectedPage();
   const token = localStorage.getItem('token')
   const pathParams = useParams()
+  const classes = useStyles();
   const { data, loading } = useRequestData(`/restaurants/${pathParams.id}`, token)
   const [restaurant, setRestaurant] = useState()
   const [products, setProducts] = useState()
@@ -101,7 +102,7 @@ const handleOpen = () => {
               <div key={category.name}>
                 {category.products.length > 0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
                 {category.products.map((product) => {
-                  return <CartCard product={product} key={product.id} />
+                  return <CartCard product={product} key={product.id} actionCartBtn={true} handleOpen={handleOpen}/>
                 })}
               </div>
             )
