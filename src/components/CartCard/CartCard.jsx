@@ -1,9 +1,9 @@
 import React from 'react'
 import { formatPrice } from '../../utils/formatPrice'
-import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, RemoveButton } from './styled'
+import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, AddButton, RemoveButton } from './styled'
 
 
-export const CartCard = ({product, removeItemFromCart}) => {
+export const CartCard = ({product, removeItemFromCart, handleOpen, actionCartBtn}) => {
   return (
     <Card key={product.id}>
       <ImageContainer image={product.photoUrl} />
@@ -11,8 +11,13 @@ export const CartCard = ({product, removeItemFromCart}) => {
         <ProductTitle>{product.name}</ProductTitle>
         <ProductDescription>{product.description}</ProductDescription>
         <ProductPrice>{formatPrice(product.price)}</ProductPrice>
-        <QuantityBox>{product.quantity}</QuantityBox>
-        <RemoveButton onClick={() => removeItemFromCart(product.id)}>remover</RemoveButton>
+        {actionCartBtn ? (
+          <AddButton onClick={handleOpen}>adicionar</AddButton>) :
+          (<>
+           <QuantityBox>{product.quantity}</QuantityBox>
+           <RemoveButton onClick={() => removeItemFromCart(product.id)}>remover</RemoveButton>
+           </>
+          )}
       </InfoBox>
     </Card>
   )

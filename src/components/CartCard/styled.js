@@ -75,3 +75,19 @@ export const RemoveButton = styled.button`
   align-items: center;
   cursor: pointer;
 `
+
+export const AddButton = styled.button`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90px;
+  height: 31px;
+  color: black;
+  background-color: transparent;
+  border-radius: 8px 0;
+  border: solid 1px black; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
