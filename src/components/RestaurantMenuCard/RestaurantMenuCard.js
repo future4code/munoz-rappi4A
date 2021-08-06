@@ -5,9 +5,10 @@ import {
   CardMediaStyle,
   ContainerInfos,
   NameRestaurant,
-} from "./CardRestaurants.style";
+  RestaurantInfos,
+} from "./styled";
 
-export default function CardRestaurants({ restaurant }) {
+export default function RestaurantMenuCard({ restaurant }) {
   return (
     <CardActionArea>
       <CardMediaStyle
@@ -15,18 +16,26 @@ export default function CardRestaurants({ restaurant }) {
         alt={restaurant.category}
         image={restaurant.logoUrl}
         title={restaurant.name}
-        height="150px"
       />
       <CardContentStyle>
-        <NameRestaurant gutterBottom variant="h5" component="h2">
+        <NameRestaurant gutterBottom variant="h5" component="h3">
           {restaurant.name}
         </NameRestaurant>
         <ContainerInfos>
           <Typography variant="body2" color="textSecondary" component="p">
-            {`${restaurant.deliveryTime}min`}
+            {`${restaurant.category}`}
           </Typography>
+          <RestaurantInfos>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {`${restaurant.deliveryTime} min`}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {`Frete R$${restaurant.shipping},00`}
+            </Typography>
+          </RestaurantInfos>
+
           <Typography variant="body2" color="textSecondary" component="p">
-            {`Frete R$${restaurant.shipping},00`}
+            {`${restaurant.address}`}
           </Typography>
         </ContainerInfos>
       </CardContentStyle>
