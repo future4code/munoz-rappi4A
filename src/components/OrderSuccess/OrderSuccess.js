@@ -27,17 +27,18 @@ const useStyles = makeStyles((theme) => ({
 const OrderSuccess = () => {
   const classes = useStyles();
   const token = localStorage.getItem("token");
-  const { activeOrder } = useRequestData("/active-order", token);
+  const { data } = useRequestData("/active-order", token);
   const [show, setShow] = useState(false);
   const [width, setWidth] = useState(false);
-
+  const activeOrder = data?.order
   const animation = () => {
     setShow(!show);
     setTimeout(() => {
       setWidth(!width);
-    }, 500);
+    }, 5000);
   };
-
+console.log("active order")
+console.log(activeOrder)
   const renderOrder = () => {
     return activeOrder && activeOrder.totalPrice ? (
       show ? (

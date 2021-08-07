@@ -18,6 +18,7 @@ export const useRequestData = (path, token) => {
         setLoading(false);
       })
       .catch((err) => {
+        console.log(err.response);
         setLoading(false);
       });
   }, [path]);
