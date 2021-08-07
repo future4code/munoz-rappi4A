@@ -82,8 +82,8 @@ const CartPage = () => {
         <p>Forma de pagamento</p>
         <FormControl component="fieldset">
           <RadioGroup aria-label="forma-de-pagamento" name="forma-de-pagamento" color={'primary'} value={paymentMethod} onChange={handlePaymentMethod}>
-            <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-            <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+            <FormControlLabel value="money" control={<Radio color="primary"/>} label="Dinheiro" />
+            <FormControlLabel value="creditcard" control={<Radio color="primary"/>} label="Cartão de Crédito" />
           </RadioGroup>
         </FormControl>
       </PaymentMethodContainer>
