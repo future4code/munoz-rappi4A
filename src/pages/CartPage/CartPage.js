@@ -234,7 +234,7 @@ const mockGetRestaurantDetails = {
 const CartPage = () => {
   useProtectedPage();
 
-  const { cart } = useContext(GlobalStateContext);
+  const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("dinheiro")
   console.log("CART:", cart);
@@ -249,17 +249,10 @@ const CartPage = () => {
     cart.forEach((item) => {
       total += item.price * item.quantity
     })
-    setTotalCart(formatPrice(total));
-  }
 
-  const removeItemFromCart = (id) => {
-    const newCart = cart.filter((item) => {
-      if (item.id === id) {
-        return false
-      }
-      return true
-    })
-    // setCart(newCart);
+    if (selectedRestaurant) total += selectedRestaurant.shipping;
+    
+    setTotalCart(formatPrice(total));
   }
 
   useEffect(() => {
@@ -272,19 +265,27 @@ const CartPage = () => {
     )
   })
 
+  console.log('RESTAURANTE: ',selectedRestaurant);
+
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
       <CardAddress showEditBtn={false} />
-      <RestaurantDetails>
-        <h3>{mockGetRestaurantDetails.restaurant.name}</h3>
-        <p>{mockGetRestaurantDetails.restaurant.address}</p>
-        <p>{mockGetRestaurantDetails.restaurant.deliveryTime + ' min'}</p>
-      </RestaurantDetails>
-      {renderCards}
-      <ShippingContainer>
-        <p>Frete: {formatPrice(mockGetRestaurantDetails.restaurant.shipping)}</p>
-      </ShippingContainer>
+      {selectedRestaurant ?
+        <>
+          <RestaurantDetails>
+            <h3>{selectedRestaurant.name}</h3>
+            <p>{selectedRestaurant.address}</p>
+            <p>{selectedRestaurant.deliveryTime + ' min'}</p>
+          </RestaurantDetails>
+          {renderCards}
+          <ShippingContainer>
+            <p>Frete: {formatPrice(selectedRestaurant.shipping)}</p>
+          </ShippingContainer>
+        </>
+      :
+      <p>Carrinho vazio</p>
+      }
       <TotalContainer>
         <p>SUBTOTAL</p>
         <TotalValue>{totalCart}</TotalValue>

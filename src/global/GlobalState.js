@@ -5,7 +5,7 @@ const GlobalState = (props) => {
   const token = localStorage.getItem("token");
   const [logout, setLogout] = useState(token ? "Sair" : "");
   const [cart, setCart] = useState([]);
-  const [selectedRestaurant, setSelectedRestaurant] = useState({});
+  const [selectedRestaurant, setSelectedRestaurant] = useState(undefined);
 
   const addToCart = (product, quantity, restaurant = null) => {
 
@@ -14,7 +14,7 @@ const GlobalState = (props) => {
       quantity: quantity,
     }
 
-    const isSameRestaurant = restaurant.id === selectedRestaurant.id
+    const isSameRestaurant = restaurant?.id === selectedRestaurant?.id
 
     if ((cart.length > 0) && !isSameRestaurant) {
       let confirm = window.confirm('Você deseja limpar o carrinho anterior e adicionar esse item?')
@@ -51,12 +51,27 @@ const GlobalState = (props) => {
     }
   }
 
+  const removeItemFromCart = (id) => {
+    const newCart = cart.filter((item) => {
+      if (item.id === id) {
+        return false
+      }
+      return true
+    })
+    setCart(newCart);
+    if (cart.length === 1) {
+      setSelectedRestaurant(undefined)
+    }
+  }
+
   const data = {
     token,
     logout,
     setLogout,
+    selectedRestaurant,
     cart,
-    addToCart
+    addToCart,
+    removeItemFromCart
   };
 
   return (
