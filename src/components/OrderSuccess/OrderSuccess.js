@@ -31,14 +31,14 @@ const OrderSuccess = () => {
   const [show, setShow] = useState(false);
   const [width, setWidth] = useState(false);
   const activeOrder = data?.order
+  
   const animation = () => {
     setShow(!show);
     setTimeout(() => {
       setWidth(!width);
     }, 5000);
   };
-console.log("active order")
-console.log(activeOrder)
+
   const renderOrder = () => {
     return activeOrder && activeOrder.totalPrice ? (
       show ? (
