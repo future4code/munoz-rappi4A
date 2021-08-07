@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const OrderSuccess = () => {
   const classes = useStyles();
 
-  const renderOrder = ({ name, subtotal }) => {
+  const renderOrder = () => {
     return (
       <div>
         <Card
@@ -39,10 +39,11 @@ const OrderSuccess = () => {
               Pedido em andamento
             </Typography>
             <Typography variant="h6" component="h2" className={classes.text}>
-            {name}
+            Burgue
             </Typography>
             <Typography variant="h6" component="h2" className={classes.text}>
-              SUBTOTAL {formatPrice(subtotal)}
+              SUBTOTAL
+              {/* {formatPrice(subtotal)} */}
             </Typography>
           </CardContent>
         </Card>

@@ -31,15 +31,6 @@ const FeedPage = () => {
 })
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
-  const [order, setOrder] = useRequestData("/active-order", {});
-
-  useEffect(() => {
-    if (order.order !== undefined && order.order !== null) {
-      setInterval(() => {
-        setOrder();
-      }, order.order.expiresAt - order.order.createdAt);
-    }
-  }, [order]);
 
   const searchResult = form.search && data.restaurants?.filter((item) => {
     return item.name.toLowerCase().includes(form.search.toLowerCase())
@@ -128,12 +119,7 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
-          {order && order.order && (
-            <OrderSuccess
-              name={order.order.restaurantName}
-              subtotal={order.order.totalPrice}
-            />
-          )}
+      <OrderSuccess />
       <Footer />
     </div>
   );
