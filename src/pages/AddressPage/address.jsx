@@ -12,6 +12,9 @@ import {
 import { useHistory } from "react-router-dom"
 import { goToLoginPage } from "../../routes/coordinator"
 import useProtectedPage from "../../hooks/useProtectedPage";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 export default function AddAddressPage() {
   const history = useHistory()
@@ -25,6 +28,7 @@ export default function AddAddressPage() {
     state: '',
     complement: '',
   })
+
   const submitAddress = (e) => {
     e.preventDefault()
     axios.put(`${BASE_URL}/address`, form, {
@@ -37,7 +41,11 @@ export default function AddAddressPage() {
       goToLoginPage(history)
     })
     .catch((error)=> {
-      alert(error.response.data)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: (error.response.data),
+      })
     })
   }
   return (

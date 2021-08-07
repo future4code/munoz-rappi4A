@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from "react"
 import { BASE_URL } from "../../constants/urls"
 import GlobalStateContext from "../../global/GlobalStateContext"
 import { ButtonLarge } from "./styled"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function PlaceOrderButton(props) {
     const [order, setOrder] = useState({})
@@ -28,12 +30,26 @@ export default function PlaceOrderButton(props) {
                 auth: token
             }
         }).then(() => {
-            alert("Seu pedido foi enviado")
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: "Seu pedido foi enviado",
+                showConfirmButton: false,
+                timer: 2500
+              })
         }).catch((err) => {
             if (err.response.data.message === "Payment Method deve ser 'money' ou 'creditcard") {
-                alert("Escolha o tipo de pagamento antes de enviar o pedido!")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Escolha o tipo de pagamento antes de enviar o pedido!",
+               })
             } else {
-               alert(err.response.data.message ? err.response.data.message : err.response)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: (err.response.data.message ? err.response.data.message : err.response),
+              })
             }
         })
 

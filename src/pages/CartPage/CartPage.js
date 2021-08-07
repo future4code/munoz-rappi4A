@@ -20,8 +20,6 @@ const CartPage = () => {
   const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("")
-  // console.log("CART:", cart);
-  console.log("PAGAMENTO:", paymentMethod);
 
   const handlePaymentMethod = (event) => {
     setPaymentMethod(event.target.value);
@@ -47,8 +45,6 @@ const CartPage = () => {
       <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false} onCartPage={true}/>
     )
   })
-
-  // console.log('RESTAURANTE: ', selectedRestaurant);
 
   return (
     <DeviceContainer>

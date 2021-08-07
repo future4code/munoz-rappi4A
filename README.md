@@ -22,6 +22,8 @@ Link do Surge: https://.surge.sh/
 - JavaScript
 - React Js
 - Styled Components
+- Material UI
+- Sweetalert2
 - React Router
 - Axios
 

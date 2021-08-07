@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import { goToAddressPage, goToLoginPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import LogoHeader from "../../components/LogoHeader/LogoHeader"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function SignUpPage() {
   const history = useHistory()
@@ -30,8 +32,11 @@ export default function SignUpPage() {
         goToAddressPage(history);
       })
       .catch((err) => {
-        alert(err.response.data.message);
-        console.log(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: (err.response.data.message),
+        })
       });
   };
   return (
