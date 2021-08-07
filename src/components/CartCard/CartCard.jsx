@@ -12,7 +12,7 @@ export const CartCard = ({product, removeItemFromCart, handleOpen, actionCartBtn
         <ProductDescription>{product.description}</ProductDescription>
         <ProductPrice>{formatPrice(product.price)}</ProductPrice>
         {actionCartBtn ? (
-          <AddButton onClick={handleOpen}>adicionar</AddButton>) :
+          <AddButton onClick={() => handleOpen(product)}>adicionar</AddButton>) :
           (<>
            <QuantityBox>{product.quantity}</QuantityBox>
            <RemoveButton onClick={() => removeItemFromCart(product.id)}>remover</RemoveButton>

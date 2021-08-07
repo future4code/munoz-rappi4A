@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, MenuItem, FormControl, Select } from "@material-ui/core";
 import RestaurantMenuCard from '../../components/RestaurantMenuCard/RestaurantMenuCard';
 
+import { useContext } from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -42,10 +45,12 @@ const RestaurantMenuPage = () => {
   const pathParams = useParams()
   const classes = useStyles();
   const { data, loading } = useRequestData(`/restaurants/${pathParams.id}`, token)
+  const { cart, addToCart } = useContext(GlobalStateContext);
   const [restaurant, setRestaurant] = useState()
   const [products, setProducts] = useState()
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
 
 
   useEffect(() => {
@@ -77,25 +82,35 @@ const RestaurantMenuPage = () => {
     }
   }, [data])
   
-const handleOpen = () => {
-      setOpen(true);
-    }
+  const handleOpen = (product) => {
+    setOpen(true);
+    setSelectedProduct(product);
+  }
 
-    const addItemToCart = (id) => {
-    }
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedProduct("");
+    setQuantity("")
+  };
 
-    const handleChange = (event) => {
-      setQuantity(Number(event.target.value) || "");
-    };
+  // const addItemToCart = (id) => {
+  // }
+
+  const handleChange = (event) => {
+    setQuantity(Number(event.target.value) || "");
+  };
   
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const addItemToCart = () => {
+    
+    // const product = {
+    //   ...selectedProduct,
+    //   quantity: quantity,
+    //   restaurant: restaurant.id
+    // }
 
-    const handleClick = () => {
-      handleClose(); 
-      addItemToCart();
-    }
+    addToCart(selectedProduct, quantity, restaurant)
+    handleClose(); 
+  }
 
  return (
     <RestaurantMenu>
@@ -140,7 +155,7 @@ const handleOpen = () => {
                   </form>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClick} className={classes.formButton}>
+                  <Button onClick={addItemToCart} className={classes.formButton}>
                     ADICIONAR AO CARRINHO
                   </Button>
                 </DialogActions>

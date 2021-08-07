@@ -12,6 +12,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
+import { useContext } from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
+
 
 import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
@@ -229,9 +232,9 @@ const mockGetRestaurantDetails = {
 
 
 const CartPage = () => {
-  // useProtectedPage();
+  useProtectedPage();
 
-  const [cart, setCart] = useState(mockGetRestaurantDetails.restaurant.products)
+  const { cart } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("dinheiro")
   console.log("CART:", cart);
@@ -256,7 +259,7 @@ const CartPage = () => {
       }
       return true
     })
-    setCart(newCart);
+    // setCart(newCart);
   }
 
   useEffect(() => {
