@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, MenuItem, FormControl, Select } from "@material-ui/core";
 import RestaurantMenuCard from '../../components/RestaurantMenuCard/RestaurantMenuCard';
 
+import { useContext } from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#5094E3",
     '&:hover': {
       color: "#e86e5a",
-   },
+    },
   }
 }));
 
@@ -42,10 +45,12 @@ const RestaurantMenuPage = () => {
   const pathParams = useParams()
   const classes = useStyles();
   const { data, loading } = useRequestData(`/restaurants/${pathParams.id}`, token)
+  const { cart, addToCart, removeItemFromCart } = useContext(GlobalStateContext);
   const [restaurant, setRestaurant] = useState()
   const [products, setProducts] = useState()
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
 
 
   useEffect(() => {
@@ -71,33 +76,43 @@ const RestaurantMenuPage = () => {
         } else {
           cat.push({ name: product.category, products: [product] })
         }
-                setRestaurant(data.restaurant)
+        setRestaurant(data.restaurant)
         setProducts(cat)
       })
     }
   }, [data])
-  
-const handleOpen = () => {
-      setOpen(true);
-    }
 
-    const addItemToCart = (id) => {
-    }
+  const handleOpen = (product) => {
+    setOpen(true);
+    setSelectedProduct(product);
+  }
 
-    const handleChange = (event) => {
-      setQuantity(Number(event.target.value) || "");
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedProduct("");
+    setQuantity("")
+  };
 
-    const handleClick = () => {
-      handleClose(); 
-      addItemToCart();
-    }
+  // const addItemToCart = (id) => {
+  // }
 
- return (
+  const handleChange = (event) => {
+    setQuantity(Number(event.target.value) || "");
+  };
+
+  const addItemToCart = () => {
+
+    // const product = {
+    //   ...selectedProduct,
+    //   quantity: quantity,
+    //   restaurant: restaurant.id
+    // }
+
+    addToCart(selectedProduct, quantity, restaurant)
+    handleClose();
+  }
+
+  return (
     <RestaurantMenu>
       <Header title={restaurant && restaurant.name} />
       {restaurant && <RestaurantMenuCard restaurant={restaurant} />}
@@ -108,45 +123,56 @@ const handleOpen = () => {
               <div key={category.name}>
                 {category.products.length > 0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
                 {category.products.map((product) => {
-                  return <CartCard product={product} key={product.id} actionCartBtn={true} handleOpen={handleOpen}/>
+                  const isInCart = cart.find(cartProduct => cartProduct.id === product.id)
+
+                  return (
+                    <CartCard 
+                    product={product} 
+                    key={product.id} 
+                    actionCartBtn={isInCart ? false : true} 
+                    handleOpen={handleOpen}
+                    cart={cart} 
+                    removeItemFromCart={removeItemFromCart}
+                    />
+                  )
                 })}
               </div>
             )
           }) :
           !loading && <p>Este Restaurante ainda não tem pratos disponíveis :(</p>
       }
-       <Footer />
-            <div>
-              <Dialog open={open} onClose={handleClose}>
-                <DialogTitle disableTypography="true"  className={classes.title}>Selecione a quantidade desejada</DialogTitle>
-                <DialogContent>
-                  <form className={classes.container}>
-                    <FormControl className={classes.formControl}>
-                      <Select
-                        labelId="demo-dialog-select-label"
-                        id="demo-dialog-select"
-                        value={quantity}
-                        onChange={handleChange}
-                        disableUnderline={true}
-                      >
-                        <MenuItem value={0}>0</MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </form>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClick} className={classes.formButton}>
-                    ADICIONAR AO CARRINHO
-                  </Button>
-                </DialogActions>
-              </Dialog>
-          </div>
-        </RestaurantMenu>
+      <Footer />
+      <div>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle disableTypography="true" className={classes.title}>Selecione a quantidade desejada</DialogTitle>
+          <DialogContent>
+            <form className={classes.container}>
+              <FormControl className={classes.formControl}>
+                <Select
+                  labelId="demo-dialog-select-label"
+                  id="demo-dialog-select"
+                  value={quantity}
+                  onChange={handleChange}
+                  disableUnderline={true}
+                >
+                  <MenuItem value={0}>0</MenuItem>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                </Select>
+              </FormControl>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={addItemToCart} className={classes.formButton}>
+              ADICIONAR AO CARRINHO
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </RestaurantMenu>
 
   )
 }
