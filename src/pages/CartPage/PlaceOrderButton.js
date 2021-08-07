@@ -1,41 +1,46 @@
 import axios from "axios"
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { BASE_URL } from "../../constants/urls"
 import GlobalStateContext from "../../global/GlobalStateContext"
 import { ButtonLarge } from "./styled"
 
-export default function PlaceOrderButton({paymentMethod}) {
-    const [order, setOrder] = useState({paymentMethod})
-    const {cart, token, selectedRestaurant} = useContext(GlobalStateContext)
+export default function PlaceOrderButton(props) {
+    const [order, setOrder] = useState({})
+    const { cart, selectedRestaurant } = useContext(GlobalStateContext)
+    const token = localStorage.getItem('token')
+    // const [paymentMethod, setPaymentMethod] = useState()
+    const paymentMethod = props.paymentMethod
+    let restaurantId = selectedRestaurant && selectedRestaurant.id
 
-    const placeOrder = () => {
-        console.log(cart)
-        console.log(cart.cart)
-        console.log(selectedRestaurant.id)
-        const restaurantId = selectedRestaurant.id
+    useEffect(() => {
         const products = []
-        cart.map((product)=> {
-            products.push({id: product.id, quantity: product.quantity})
+        cart.map((product) => {
+            ''
+            products.push({ id: product.id, quantity: product.quantity })
         })
-        setOrder({products, paymentMethod, })
-        axios.post(`${BASE_URL}/${restaurantId}/order`, order, {
-            headers:{
+
+        setOrder({ products, paymentMethod })
+
+    }, [cart, selectedRestaurant, props.paymentMethod])
+    const placeOrder = () => {
+        axios.post(`${BASE_URL}/restaurants/${restaurantId}/order`, order, {
+            headers: {
                 auth: token
             }
-        }) .then((res)=>{
+        }).then((res) => {
             console.log("Seu pedido foi enviado", res)
-        }).catch((err)=>{
-            console.log(err.response)
+        }).catch((err) => {
+            if (err.response.data.message === "Payment Method deve ser 'money' ou 'creditcard") {
+                alert("Escolha o tipo de pagamento antes de enviar o pedido!")
+            } else {
+               alert(err.response.data.message ? err.response.data.message : err.response)
+            }
         })
-        console.log(restaurantId)
-        
+
     }
-    console.log("Carrinho", cart)
-    console.log("Pedido",order)
-    console.log(selectedRestaurant)
     return (
         <>
-        <ButtonLarge onClick={placeOrder}>Confirmar</ButtonLarge>
+            <ButtonLarge onClick={placeOrder}>Confirmar</ButtonLarge>
         </>
     )
 }
