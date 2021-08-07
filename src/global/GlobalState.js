@@ -20,6 +20,7 @@ const GlobalState = (props) => {
       let confirm = window.confirm('Você deseja limpar o carrinho anterior e adicionar esse item?')
 
       if (confirm) {
+        setSelectedRestaurant(restaurant)
         return setCart([updateProduct])
       } else {
         return confirm = false

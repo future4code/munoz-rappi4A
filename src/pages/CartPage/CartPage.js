@@ -251,7 +251,7 @@ const CartPage = () => {
     })
 
     if (selectedRestaurant) total += selectedRestaurant.shipping;
-    
+
     setTotalCart(formatPrice(total));
   }
 
@@ -261,11 +261,11 @@ const CartPage = () => {
 
   const renderCards = cart.map((product) => {
     return (
-      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false}/>
+      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false} onCartPage={true}/>
     )
   })
 
-  console.log('RESTAURANTE: ',selectedRestaurant);
+  console.log('RESTAURANTE: ', selectedRestaurant);
 
   return (
     <DeviceContainer>
@@ -283,8 +283,13 @@ const CartPage = () => {
             <p>Frete: {formatPrice(selectedRestaurant.shipping)}</p>
           </ShippingContainer>
         </>
-      :
-      <p>Carrinho vazio</p>
+        :
+        <>
+          <p>Carrinho vazio</p>
+          <ShippingContainer>
+            <p>Frete: {formatPrice(0)}</p>
+          </ShippingContainer>
+        </>
       }
       <TotalContainer>
         <p>SUBTOTAL</p>
