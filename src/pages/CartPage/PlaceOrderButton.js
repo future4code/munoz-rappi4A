@@ -10,7 +10,6 @@ export default function PlaceOrderButton(props) {
     const [order, setOrder] = useState({})
     const { cart, selectedRestaurant } = useContext(GlobalStateContext)
     const token = localStorage.getItem('token')
-    // const [paymentMethod, setPaymentMethod] = useState()
     const paymentMethod = props.paymentMethod
     let restaurantId = selectedRestaurant && selectedRestaurant.id
 
@@ -56,7 +55,7 @@ export default function PlaceOrderButton(props) {
     }
     return (
         <>
-            <ButtonLarge onClick={placeOrder}>Confirmar</ButtonLarge>
+            <ButtonLarge onClick={placeOrder}>Enviar Pedido!</ButtonLarge>
         </>
     )
 }
