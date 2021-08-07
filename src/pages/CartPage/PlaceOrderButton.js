@@ -5,8 +5,11 @@ import GlobalStateContext from "../../global/GlobalStateContext"
 import { ButtonLarge } from "./styled"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { useHistory } from "react-router-dom";
+import { goToFeedPage } from "../../routes/coordinator";
 
 export default function PlaceOrderButton(props) {
+    const history = useHistory();
     const [order, setOrder] = useState({})
     const { cart, selectedRestaurant } = useContext(GlobalStateContext)
     const token = localStorage.getItem('token')
@@ -34,8 +37,9 @@ export default function PlaceOrderButton(props) {
                 icon: 'success',
                 title: "Seu pedido foi enviado",
                 showConfirmButton: false,
-                timer: 2500
+                timer: 2000
               })
+              goToFeedPage(history);
         }).catch((err) => {
             if (err.response.data.message === "Payment Method deve ser 'money' ou 'creditcard") {
             Swal.fire({
