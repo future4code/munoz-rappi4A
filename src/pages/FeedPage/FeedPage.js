@@ -4,7 +4,7 @@ import {
   InputAdornment,
   TextField,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
@@ -20,6 +20,7 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
+import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -30,7 +31,15 @@ const FeedPage = () => {
 })
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
-  // console.log(data);
+  const [order, setOrder] = useRequestData("active-order", {});
+
+  useEffect(() => {
+    if (order.order !== undefined && order.order !== null) {
+      setInterval(() => {
+        setOrder();
+      }, order.order.expiresAt - order.order.createdAt);
+    }
+  }, [order]);
 
   const searchResult = form.search && data.restaurants?.filter((item) => {
     return item.name.toLowerCase().includes(form.search.toLowerCase())
@@ -87,7 +96,7 @@ const FeedPage = () => {
   console.log(RestaurantesFiltrados);
 
   const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
-    return <CardRestaurants restaurant={restaurant} />;
+    return <CardRestaurants restaurant={restaurant} />
   });
   return (
     <div>
@@ -119,6 +128,12 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
+          {order && order.order && (
+            <OrderSuccess
+              name={order.order.restaurantName}
+              subtotal={order.order.totalPrice}
+            />
+          )}
       <Footer />
     </div>
   );
