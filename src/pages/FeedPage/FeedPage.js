@@ -4,7 +4,7 @@ import {
   InputAdornment,
   TextField,
 } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
