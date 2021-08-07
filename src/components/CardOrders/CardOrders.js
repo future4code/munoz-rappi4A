@@ -37,11 +37,12 @@ const CardOrders = () => {
   const token = localStorage.getItem("token");
   const {data, loading} = useRequestData("/orders/history", token);
   const [orders, setOrders] = useState()
-  console.log(orders)
+
   useEffect(()=>{
     data &&
     setOrders(data.orders)
   }, [data])
+  
   const renderOrders = () => {
     if (!loading && orders.length > 0) {
       return orders.map((item) => {
