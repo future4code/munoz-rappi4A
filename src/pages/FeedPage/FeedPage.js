@@ -20,6 +20,7 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
+import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -30,7 +31,6 @@ const FeedPage = () => {
 })
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
-  // console.log(data);
 
   const searchResult = form.search && data.restaurants?.filter((item) => {
     return item.name.toLowerCase().includes(form.search.toLowerCase())
@@ -87,7 +87,7 @@ const FeedPage = () => {
   console.log(RestaurantesFiltrados);
 
   const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
-    return <CardRestaurants restaurant={restaurant} />;
+    return <CardRestaurants restaurant={restaurant} />
   });
   return (
     <div>
@@ -119,6 +119,7 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
+      <OrderSuccess />
       <Footer />
     </div>
   );

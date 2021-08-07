@@ -2,27 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
 import CardAddress from '../../components/CardAddress/CardAddress';
-
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
-
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-
 import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
-
-
-import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
+import { ButtonLarge, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
 
+
 const CartPage = () => {
   useProtectedPage();
-
   const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("")
