@@ -27,8 +27,8 @@ export default function PlaceOrderButton(props) {
             headers: {
                 auth: token
             }
-        }).then((res) => {
-            console.log("Seu pedido foi enviado", res)
+        }).then(() => {
+            alert("Seu pedido foi enviado")
         }).catch((err) => {
             if (err.response.data.message === "Payment Method deve ser 'money' ou 'creditcard") {
                 alert("Escolha o tipo de pagamento antes de enviar o pedido!")
