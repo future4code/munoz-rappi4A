@@ -20,8 +20,6 @@ const CartPage = () => {
   const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("")
-  // console.log("CART:", cart);
-  console.log("PAGAMENTO:", paymentMethod);
 
   const handlePaymentMethod = (event) => {
     setPaymentMethod(event.target.value);
@@ -47,8 +45,6 @@ const CartPage = () => {
       <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false} onCartPage={true}/>
     )
   })
-
-  // console.log('RESTAURANTE: ', selectedRestaurant);
 
   return (
     <DeviceContainer>
@@ -82,8 +78,8 @@ const CartPage = () => {
         <p>Forma de pagamento</p>
         <FormControl component="fieldset">
           <RadioGroup aria-label="forma-de-pagamento" name="forma-de-pagamento" color={'primary'} value={paymentMethod} onChange={handlePaymentMethod}>
-            <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-            <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+            <FormControlLabel value="money" control={<Radio color="primary"/>} label="Dinheiro" />
+            <FormControlLabel value="creditcard" control={<Radio color="primary"/>} label="Cartão de Crédito" />
           </RadioGroup>
         </FormControl>
       </PaymentMethodContainer>

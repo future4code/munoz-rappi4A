@@ -75,16 +75,12 @@ const FeedPage = () => {
   const onClickCategorias = (selectCategory) => {
     data.restaurants.forEach((restaurant) => {
       if (restaurant.category === selectCategory) {
-        console.log(restaurant);
         filteredRestaurants.push(restaurant);
       }
     });
-
-    console.log(filteredRestaurants);
     setFiltered(true);
     setRestaurantesFiltrados(filteredRestaurants);
   };
-  console.log(RestaurantesFiltrados);
 
   const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
     return <CardRestaurants restaurant={restaurant} />
