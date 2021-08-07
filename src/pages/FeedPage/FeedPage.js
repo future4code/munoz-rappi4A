@@ -31,7 +31,7 @@ const FeedPage = () => {
 })
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
-  const [order, setOrder] = useRequestData("active-order", {});
+  const [order, setOrder] = useRequestData("/active-order", {});
 
   useEffect(() => {
     if (order.order !== undefined && order.order !== null) {
