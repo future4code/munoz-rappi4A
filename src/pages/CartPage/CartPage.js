@@ -18,6 +18,7 @@ import GlobalStateContext from "../../global/GlobalStateContext";
 
 import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
+import PlaceOrderButton from "./PlaceOrderButton";
 
 const mockGetRestaurants = {
   "restaurants": [
@@ -237,8 +238,8 @@ const CartPage = () => {
   const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("dinheiro")
-  console.log("CART:", cart);
-  console.log("PAGAMENTO:", paymentMethod);
+  // console.log("CART:", cart);
+  // console.log("PAGAMENTO:", paymentMethod);
 
   const handlePaymentMethod = (event) => {
     setPaymentMethod(event.target.value);
@@ -300,11 +301,11 @@ const CartPage = () => {
         <FormControl component="fieldset">
           <RadioGroup aria-label="forma-de-pagamento" name="forma-de-pagamento" value={paymentMethod} onChange={handlePaymentMethod}>
             <FormControlLabel value="dinheiro" control={<Radio />} label="Dinheiro" />
-            <FormControlLabel value="credito" control={<Radio />} label="Cartão de Crédito" />
+            <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
           </RadioGroup>
         </FormControl>
       </PaymentMethodContainer>
-      <ButtonLarge>Confirmar</ButtonLarge>
+      <PlaceOrderButton paymentMethod={paymentMethod}/>
       <Footer />
     </DeviceContainer>
   )
