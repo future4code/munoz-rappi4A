@@ -12,6 +12,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
+import { useContext } from "react";
+import GlobalStateContext from "../../global/GlobalStateContext";
+
 
 import { ButtonLarge, DeliverAddress, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
@@ -229,9 +232,9 @@ const mockGetRestaurantDetails = {
 
 
 const CartPage = () => {
-  // useProtectedPage();
+  useProtectedPage();
 
-  const [cart, setCart] = useState(mockGetRestaurantDetails.restaurant.products)
+  const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("dinheiro")
   console.log("CART:", cart);
@@ -246,17 +249,10 @@ const CartPage = () => {
     cart.forEach((item) => {
       total += item.price * item.quantity
     })
-    setTotalCart(formatPrice(total));
-  }
 
-  const removeItemFromCart = (id) => {
-    const newCart = cart.filter((item) => {
-      if (item.id === id) {
-        return false
-      }
-      return true
-    })
-    setCart(newCart);
+    if (selectedRestaurant) total += selectedRestaurant.shipping;
+
+    setTotalCart(formatPrice(total));
   }
 
   useEffect(() => {
@@ -265,23 +261,36 @@ const CartPage = () => {
 
   const renderCards = cart.map((product) => {
     return (
-      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false}/>
+      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false} onCartPage={true}/>
     )
   })
+
+  console.log('RESTAURANTE: ', selectedRestaurant);
 
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
       <CardAddress showEditBtn={false} />
-      <RestaurantDetails>
-        <h3>{mockGetRestaurantDetails.restaurant.name}</h3>
-        <p>{mockGetRestaurantDetails.restaurant.address}</p>
-        <p>{mockGetRestaurantDetails.restaurant.deliveryTime + ' min'}</p>
-      </RestaurantDetails>
-      {renderCards}
-      <ShippingContainer>
-        <p>Frete: {formatPrice(mockGetRestaurantDetails.restaurant.shipping)}</p>
-      </ShippingContainer>
+      {selectedRestaurant ?
+        <>
+          <RestaurantDetails>
+            <h3>{selectedRestaurant.name}</h3>
+            <p>{selectedRestaurant.address}</p>
+            <p>{selectedRestaurant.deliveryTime + ' min'}</p>
+          </RestaurantDetails>
+          {renderCards}
+          <ShippingContainer>
+            <p>Frete: {formatPrice(selectedRestaurant.shipping)}</p>
+          </ShippingContainer>
+        </>
+        :
+        <>
+          <p>Carrinho vazio</p>
+          <ShippingContainer>
+            <p>Frete: {formatPrice(0)}</p>
+          </ShippingContainer>
+        </>
+      }
       <TotalContainer>
         <p>SUBTOTAL</p>
         <TotalValue>{totalCart}</TotalValue>

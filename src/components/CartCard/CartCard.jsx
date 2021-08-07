@@ -3,7 +3,10 @@ import { formatPrice } from '../../utils/formatPrice'
 import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, AddButton, RemoveButton } from './styled'
 
 
-export const CartCard = ({product, removeItemFromCart, handleOpen, actionCartBtn}) => {
+export const CartCard = ({ product, cart, removeItemFromCart, onCartPage, handleOpen, actionCartBtn }) => {
+
+  const filteredProduct = cart?.find(cartProduct => cartProduct.id === product.id)
+
   return (
     <Card key={product.id}>
       <ImageContainer image={product.photoUrl} />
@@ -12,12 +15,22 @@ export const CartCard = ({product, removeItemFromCart, handleOpen, actionCartBtn
         <ProductDescription>{product.description}</ProductDescription>
         <ProductPrice>{formatPrice(product.price)}</ProductPrice>
         {actionCartBtn ? (
-          <AddButton onClick={handleOpen}>adicionar</AddButton>) :
-          (<>
-           <QuantityBox>{product.quantity}</QuantityBox>
-           <RemoveButton onClick={() => removeItemFromCart(product.id)}>remover</RemoveButton>
-           </>
-          )}
+          <AddButton onClick={() => handleOpen(product)}>adicionar</AddButton>)
+          :
+          <>
+            {onCartPage ?
+              <>
+                <QuantityBox>{product.quantity}</QuantityBox>
+                <RemoveButton onClick={() => removeItemFromCart(product.id)}>remover</RemoveButton>
+              </>
+              :
+              <>
+                <QuantityBox>{filteredProduct.quantity}</QuantityBox>
+                <RemoveButton onClick={() => handleOpen(product)}>editar</RemoveButton>
+              </>
+            }
+          </>
+        }
       </InfoBox>
     </Card>
   )
