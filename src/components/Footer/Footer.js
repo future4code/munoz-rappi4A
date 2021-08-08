@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import { MdlMiniFooter, ListsIcons } from "./styled";
+import { MdlMiniFooter, ListsIcons, FooterContainer } from "./styled";
 import HouseOutlinedIcon from "@material-ui/icons/HouseOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
@@ -25,7 +25,7 @@ export function Footer() {
 
   return (
     <MdlMiniFooter>
-      <div class="container">
+      <FooterContainer class="container">
         <ListsIcons>
           <li onClick={() => goToFeedPage(history)}>
             <HouseOutlinedIcon
@@ -49,7 +49,7 @@ export function Footer() {
             />
           </li>
         </ListsIcons>
-      </div>
+      </FooterContainer>
     </MdlMiniFooter>
   );
 }

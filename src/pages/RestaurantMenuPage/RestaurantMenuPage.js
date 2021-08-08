@@ -114,25 +114,32 @@ const RestaurantMenuPage = () => {
 
   return (
     <RestaurantMenu>
-      <Header title={restaurant && restaurant.name} />
-      {restaurant && <RestaurantMenuCard restaurant={restaurant} />}
+      <Header
+        title={restaurant && restaurant.name} showBackBtn={true}
+      />
+      {restaurant && 
+      <RestaurantMenuCard restaurant={restaurant} />
+      }
       {
         restaurant && products ?
           products.map((category) => {
             return (
               <div key={category.name}>
-                {category.products.length > 0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
+                {category.products.length > 0 && <ContainerTiposComida>
+                  <TiposDeComida>{category.name}</TiposDeComida>
+                </ContainerTiposComida>
+                }
                 {category.products.map((product) => {
                   const isInCart = cart.find(cartProduct => cartProduct.id === product.id)
 
                   return (
-                    <CartCard 
-                    product={product} 
-                    key={product.id} 
-                    actionCartBtn={isInCart ? false : true} 
-                    handleOpen={handleOpen}
-                    cart={cart} 
-                    removeItemFromCart={removeItemFromCart}
+                    <CartCard
+                      product={product}
+                      key={product.id}
+                      actionCartBtn={isInCart ? false : true}
+                      handleOpen={handleOpen}
+                      cart={cart}
+                      removeItemFromCart={removeItemFromCart}
                     />
                   )
                 })}

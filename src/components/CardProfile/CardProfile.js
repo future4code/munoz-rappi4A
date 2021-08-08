@@ -4,6 +4,7 @@ import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
 import { goToEditProfilePage } from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
+import { CardStyle } from "./style";
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {
@@ -36,7 +37,7 @@ const CardProfile = () => {
         {loading && <p>Carregando...</p>}
         {profile && (
           <div>
-            <Card
+            <CardStyle
               className={classes.containerMain}
               style={{ border: "none", boxShadow: "none" }}
             >
@@ -69,7 +70,7 @@ const CardProfile = () => {
                   onClick={() => goToEditProfilePage(history)}
                 />
               </CardContent>
-            </Card>
+            </CardStyle>
           </div>
         )}
       </div>

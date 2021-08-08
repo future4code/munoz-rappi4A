@@ -1,9 +1,8 @@
 import {
   CardActionArea,
-  Container,
   InputAdornment,
-  TextField,
 } from "@material-ui/core";
+import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
@@ -14,6 +13,8 @@ import {
   ContainerTodosTipos,
   SearchIconStyle,
   TiposDeComida,
+  SearchField,
+  ContainerStyle
 } from "./feedPage.style";
 import searchIcon from "../../assets/search.svg";
 import { useRequestData } from "../../hooks/useRequestData";
@@ -89,22 +90,25 @@ const FeedPage = () => {
     <div>
       <>
         <Header showBackBtn={false} title={"Rappi4"} />
-        <Container>
+        <ContainerStyle>
           <ContainerBusca>
-            <TextField
+            <SearchField
               id="input-with-icon-textfield"
               placeholder="Restaurantes"
               type="text"
               onChange={onChangeForm}
               value={form.search}
               name={"search"}
+              variant="outlined"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
                 ),
               }}
             />
-            <SearchIconStyle src={searchIcon} />
+            {/* <SearchIconStyle src={searchIcon} /> */}
           </ContainerBusca>
           <ContainerTodosTipos>
             <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
@@ -113,7 +117,7 @@ const FeedPage = () => {
             {loading && <Loading />}
             {filtered ? renderRestaurants : nameRestaurants || listRestaurants}
           </CardActionArea>
-        </Container>
+        </ContainerStyle>
       </>
       <OrderSuccess />
       <Footer />

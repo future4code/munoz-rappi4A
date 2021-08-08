@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(12, 1fr)",
     borderShadow: "white",
-    margin: "8px",
+    // margin: "8px",
     backgroundColor: "#EEEEEE",
   },
   icon: {
@@ -40,7 +40,10 @@ const CardAddress = (props) => {
             >
               <CardContent style={{ gridColumnEnd: "span 11" }}>
                 <Typography variant="h6" component="h2" color="textSecondary">
-                  Endereço Cadastrado
+                  {props.onCartPage ?
+                    'Endereço de entrega'
+                    :
+                    "Endereço Cadastrado"}
                 </Typography>
 
                 {profile.user.hasAddress === true ? (

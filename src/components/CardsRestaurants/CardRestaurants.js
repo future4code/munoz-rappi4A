@@ -1,4 +1,4 @@
-import { CardActionArea, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { goToRestaurantMenuPage } from "../../routes/coordinator";
@@ -7,13 +7,14 @@ import {
   CardMediaStyle,
   ContainerInfos,
   NameRestaurant,
+  CardActionAreaStyle
 } from "./CardRestaurants.style";
 
 export default function CardRestaurants({ restaurant }) {
   const history = useHistory();
 
   return (
-    <CardActionArea onClick={() => goToRestaurantMenuPage(history, restaurant.id)}>
+    <CardActionAreaStyle onClick={() => goToRestaurantMenuPage(history, restaurant.id)}>
       <CardMediaStyle
         component={"img"}
         alt={restaurant.category}
@@ -34,6 +35,6 @@ export default function CardRestaurants({ restaurant }) {
           </Typography>
         </ContainerInfos>
       </CardContentStyle>
-    </CardActionArea>
+    </CardActionAreaStyle>
   );
 }

@@ -10,7 +10,12 @@ export const MdlMiniFooter = styled.footer`
   background-color: white;
 `;
 
+export const FooterContainer = styled.div`
+  height: 100%;
+`;
+
 export const ListsIcons = styled.ul`
+  height: 100%;
   display: flex;
   list-style: none;
   align-items: center;

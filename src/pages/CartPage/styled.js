@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 
 export const DeviceContainer = styled.div`
-  width: 360px;
+  width: 100%;
   margin: 0 auto 65px;
   display: flex;
   flex-direction: column;
@@ -10,8 +10,16 @@ export const DeviceContainer = styled.div`
   align-items: center;
 `
 
+export const EmptyCard = styled.div`
+  margin-top: 20px;
+`
+
 export const RestaurantDetails = styled.div`
   padding: 16px 18px;
+
+  h3 {
+    color: #e86e5a;
+  }
 `
 
 export const ShippingContainer = styled.div`

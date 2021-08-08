@@ -18,6 +18,8 @@ const GlobalState = (props) => {
 
     const isSameRestaurant = restaurant?.id === selectedRestaurant?.id
 
+
+
     if ((cart.length > 0) && !isSameRestaurant) {
       Swal.fire({
       title: "Você deseja limpar o carrinho anterior e adicionar esse item?",
@@ -34,9 +36,9 @@ const GlobalState = (props) => {
         Swal.fire("Seus produtos ainda estão no seu carrinho");
       }
     });
+    return
     }
 
-    
     setSelectedRestaurant(restaurant)
 
     const isInCart = cart.find(productInCart => productInCart.id === product.id)

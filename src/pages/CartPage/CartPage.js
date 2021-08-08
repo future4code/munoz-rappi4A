@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { ButtonLarge, DeviceContainer, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
+import { ButtonLarge, DeviceContainer, EmptyCard, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
 
@@ -49,7 +49,7 @@ const CartPage = () => {
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
-      <CardAddress showEditBtn={false} />
+      <CardAddress showEditBtn={false} onCartPage={true}/>
       {selectedRestaurant ?
         <>
           <RestaurantDetails>
@@ -64,7 +64,7 @@ const CartPage = () => {
         </>
         :
         <>
-          <p>Carrinho vazio</p>
+          <EmptyCard>Carrinho vazio</EmptyCard>
           <ShippingContainer>
             <p>Frete: {formatPrice(0)}</p>
           </ShippingContainer>
