@@ -12,7 +12,7 @@ export const RestaurantMenu = styled.main`
     padding: 0 16px;
 `
 
-export const TiposDeComida = styled.p`
+export const FoodTypes = styled.p`
   width: 100%;
   border-bottom: 1px solid #000;
   padding-bottom: 5px;
@@ -20,7 +20,7 @@ export const TiposDeComida = styled.p`
   color: #000;
 `;
 
-export const ContainerTiposComida = styled.div`
+export const FoodTypesContainer = styled.div`
   display: flex;
   align-items: flex-start;
 `;

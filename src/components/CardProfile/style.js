@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import {
-  Card
-} from "@material-ui/core";
+import { Card } from "@material-ui/core";
 
 export const CardStyle = styled(Card)`
   && {

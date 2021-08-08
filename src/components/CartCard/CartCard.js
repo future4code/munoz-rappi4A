@@ -1,6 +1,6 @@
 import React from 'react'
 import { formatPrice } from '../../utils/formatPrice'
-import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, AddButton, RemoveButton } from './styled'
+import { Card, ImageContainer, InfoBox, ProductDescription, ProductPrice, ProductTitle, QuantityBox, AddButton, RemoveButton } from './style'
 
 
 export const CartCard = ({ product, cart, removeItemFromCart, onCartPage, handleOpen, actionCartBtn }) => {

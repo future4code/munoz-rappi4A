@@ -1,16 +1,15 @@
-import { Button, TextField } from "@material-ui/core";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { goToProfilePage } from "../../routes/coordinator";
 import { BASE_URL } from "../../constants/urls";
 import { useForm } from "../../hooks/useForm";
-import React, { useEffect } from "react";
-import { InputsContainer, SignUpPageContainer } from "./styled";
-import { useHistory } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
-import { goToProfilePage } from "../../routes/coordinator";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { Button, TextField } from "@material-ui/core";
+import { InputsContainer, SignUpPageContainer } from "./style";
 
 const EditProfilePage = () => {
   useProtectedPage();

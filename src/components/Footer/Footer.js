@@ -1,15 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import { MdlMiniFooter, ListsIcons, FooterContainer } from "./styled";
+import { goToFeedPage, goToCartPage, goToProfilePage, } from "../../routes/coordinator";
+import { makeStyles } from "@material-ui/core/styles";
 import HouseOutlinedIcon from "@material-ui/icons/HouseOutlined";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
-import {
-  goToFeedPage,
-  goToCartPage,
-  goToProfilePage,
-} from "../../routes/coordinator";
+import { MdlMiniFooter, ListsIcons, FooterContainer } from "./style";
 
 const useStyles = makeStyles(() => ({
   buttonColor: {

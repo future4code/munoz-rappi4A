@@ -1,23 +1,16 @@
 import styled from "styled-components";
-import {
-  CardActionArea,
-  Container,
-  InputAdornment,
-  TextField,
-} from "@material-ui/core";
+import { Container, TextField } from "@material-ui/core";
 
 export const SearchField = styled(TextField)`
   width: 100%;
-
 `
 
-export const ContainerBusca = styled.div`
+export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   border-radius: 2px;
   color: #b8b8b8;
-  /* border: solid 1px #b8b8b8; */
 `;
 
 export const SearchIconStyle = styled.img`
@@ -31,16 +24,15 @@ export const ContainerStyle = styled(Container)`
   padding-bottom: 75px;
 `
 
-export const ContainerTodosTipos = styled.div`
+export const AllTypeContainer = styled.div`
   overflow-x: scroll;
   margin-top: 20px;
   padding: 8px;
-  /* border: solid 2px green; */
 `;
-export const ContainerTiposComida = styled.div`
+export const FoodTypeContainer = styled.div`
   display: flex;
 `;
-export const TiposDeComida = styled.p`
+export const FoodTypes = styled.p`
   margin-right: 20px;
   cursor: pointer;
   :hover{

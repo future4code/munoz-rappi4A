@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { goToLoginPage } from "../../routes/coordinator";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import BackButton from "../../assets/back.svg";
 import { HeaderContainer, Title } from "./style";
-import { goToLoginPage } from "../../routes/coordinator";
 
 export function Header(props) {
   const history = useHistory();

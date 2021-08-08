@@ -1,7 +1,7 @@
 import React from "react";
 import { useRequestData } from "../../hooks/useRequestData";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
+import { CardContent, Typography, makeStyles } from "@material-ui/core";
 import { goToEditProfilePage } from "../../routes/coordinator";
 import { useHistory } from "react-router-dom";
 import { CardStyle } from "./style";

@@ -2,13 +2,7 @@ import { Typography } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { goToRestaurantMenuPage } from "../../routes/coordinator";
-import {
-  CardContentStyle,
-  CardMediaStyle,
-  ContainerInfos,
-  NameRestaurant,
-  CardActionAreaStyle
-} from "./CardRestaurants.style";
+import { CardContentStyle, CardMediaStyle, ContainerInfos, NameRestaurant, CardActionAreaStyle } from "./style";
 
 export default function CardRestaurants({ restaurant }) {
   const history = useHistory();

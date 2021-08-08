@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { BASE_URL } from "../constants/urls";
 
 export const useRequestData = (path, token) => {

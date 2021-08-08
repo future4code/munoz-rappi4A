@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
 import CardAddress from '../../components/CardAddress/CardAddress';
-import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { useContext } from "react";
+import useProtectedPage from "../../hooks/useProtectedPage";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { ButtonLarge, DeviceContainer, EmptyCard, ImageContainer, InfoBox, PaymentMethodContainer, QuantityBox, RemoveButton, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './styled'
 import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import { DeviceContainer, EmptyCard, PaymentMethodContainer, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './style'
 
 
 const CartPage = () => {
