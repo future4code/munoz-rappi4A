@@ -27,26 +27,34 @@ const FeedPage = () => {
   const [filtered, setFiltered] = useState(false);
   const [RestaurantesFiltrados, setRestaurantesFiltrados] = useState([]);
   const { form, onChangeForm } = useForm({
-    search: ""
-})
+    search: "",
+  });
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
 
-  const searchResult = form.search && data.restaurants?.filter((item) => {
-    return item.name.toLowerCase().includes(form.search.toLowerCase())
-    })
+  const searchResult =
+    form.search &&
+    data.restaurants?.filter((item) => {
+      return item.name.toLowerCase().includes(form.search.toLowerCase());
+    });
 
   let nameRestaurants =
-    form.search && searchResult.length > 0 ?
-    searchResult?.map((restaurant, index) => {
-      return <CardRestaurants restaurant={restaurant} />;
-    }) : form.search && !searchResult.length && <p>Busca não coincide com nenhum restaurante :(</p>
+    form.search && searchResult.length > 0
+      ? searchResult?.map((restaurant, index) => {
+          return <CardRestaurants restaurant={restaurant} />;
+        })
+      : form.search &&
+        !searchResult.length && (
+          <p>Busca não coincide com nenhum restaurante :(</p>
+        );
 
   let listRestaurants =
     data &&
     data.restaurants &&
     data.restaurants.map((restaurant, index) => {
-      return <CardRestaurants restaurant={restaurant} height="150px" />;
+      return (
+        <CardRestaurants key={index} restaurant={restaurant} height="150px" />
+      );
     });
 
   const filteredTypes = [];
@@ -75,6 +83,7 @@ const FeedPage = () => {
   const onClickCategorias = (selectCategory) => {
     data.restaurants.forEach((restaurant) => {
       if (restaurant.category === selectCategory) {
+
         filteredRestaurants.push(restaurant);
       }
     });
@@ -83,7 +92,8 @@ const FeedPage = () => {
   };
 
   const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
-    return <CardRestaurants restaurant={restaurant} />
+    return <CardRestaurants key={restaurant.id} restaurant={restaurant} />
+
   });
   return (
     <div>

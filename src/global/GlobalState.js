@@ -10,13 +10,13 @@ const GlobalState = (props) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(undefined);
 
   const addToCart = (product, quantity, restaurant = null) => {
-
     const updateProduct = {
       ...product,
       quantity: quantity,
-    }
+    };
 
-    const isSameRestaurant = restaurant?.id === selectedRestaurant?.id
+    const isSameRestaurant = restaurant?.id === selectedRestaurant?.id;
+
 
     if ((cart.length > 0) && !isSameRestaurant) {
       Swal.fire({
@@ -36,44 +36,42 @@ const GlobalState = (props) => {
     });
     }
 
+
     
     setSelectedRestaurant(restaurant)
 
-    const isInCart = cart.find(productInCart => productInCart.id === product.id)
+    const isInCart = cart.find(
+      (productInCart) => productInCart.id === product.id
+    );
 
     if (isInCart) {
       const newCart = cart.map((productInCart) => {
-
         if (productInCart.id === product.id) {
           return updateProduct;
         } else {
           return productInCart;
         }
-      })
+      });
 
-      setCart(newCart)
-    
+      setCart(newCart);
     } else {
-      const updateCart = [
-        ...cart,
-        updateProduct
-      ]
-      setCart(updateCart)
+      const updateCart = [...cart, updateProduct];
+      setCart(updateCart);
     }
-  }
+  };
 
   const removeItemFromCart = (id) => {
     const newCart = cart.filter((item) => {
       if (item.id === id) {
-        return false
+        return false;
       }
-      return true
-    })
+      return true;
+    });
     setCart(newCart);
     if (cart.length === 1) {
-      setSelectedRestaurant(undefined)
+      setSelectedRestaurant(undefined);
     }
-  }
+  };
 
   const data = {
     token,
@@ -81,8 +79,9 @@ const GlobalState = (props) => {
     setLogout,
     selectedRestaurant,
     cart,
+    setCart,
     addToCart,
-    removeItemFromCart
+    removeItemFromCart,
   };
 
   return (

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Header } from '../../components/Header/Header';
+import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
+import FormLabel from "@material-ui/core/FormLabel";
+import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
+import { goToFeedPage } from "../../routes/coordinator";
+import { useHistory } from "react-router-dom";
 import CardAddress from '../../components/CardAddress/CardAddress';
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from '../../components/CartCard/CartCard';
@@ -15,8 +19,14 @@ import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
 
 
-const CartPage = () => {
+
+const CartPage = (props) => {
   useProtectedPage();
+
+  const history = useHistory();
+  const [confirm, setConfirm] = useState(false);
+  const [totalCart, setTotalCart] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("dinheiro");
   const { cart, removeItemFromCart, selectedRestaurant } = useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("")
@@ -26,50 +36,66 @@ const CartPage = () => {
   };
 
   const calculateTotalCart = () => {
-    let total = 0
+    let total = 0;
     cart.forEach((item) => {
-      total += item.price * item.quantity
-    })
+      total += item.price * item.quantity;
+    });
 
     if (selectedRestaurant) total += selectedRestaurant.shipping;
 
     setTotalCart(formatPrice(total));
-  }
+  };
 
   useEffect(() => {
-    calculateTotalCart()
-  })
+    calculateTotalCart();
+  });
 
   const renderCards = cart.map((product) => {
     return (
-      <CartCard product={product} removeItemFromCart={removeItemFromCart} actionCartBtn={false} onCartPage={true}/>
-    )
-  })
+
+      <CartCard
+        product={product}
+        removeItemFromCart={removeItemFromCart}
+        actionCartBtn={false}
+        onCartPage={true}
+      />
+    );
+  });
+
+  const confirmButton = () => {
+    setConfirm(true);
+    setCart({});
+    // goToFeedPage(history);
+    console.log("FUNCIONOU");
+  };
+
+  
+
 
   return (
     <DeviceContainer>
-      <Header showBackBtn={false} title={'Meu Carrinho'} />
+      <Header showBackBtn={false} title={"Meu Carrinho"} />
       <CardAddress showEditBtn={false} />
-      {selectedRestaurant ?
+      {selectedRestaurant ? (
         <>
           <RestaurantDetails>
             <h3>{selectedRestaurant.name}</h3>
             <p>{selectedRestaurant.address}</p>
-            <p>{selectedRestaurant.deliveryTime + ' min'}</p>
+            <p>{selectedRestaurant.deliveryTime + " min"}</p>
           </RestaurantDetails>
           {renderCards}
           <ShippingContainer>
             <p>Frete: {formatPrice(selectedRestaurant.shipping)}</p>
           </ShippingContainer>
         </>
-        :
+      ) : (
         <>
           <p>Carrinho vazio</p>
           <ShippingContainer>
             <p>Frete: {formatPrice(0)}</p>
           </ShippingContainer>
         </>
-      }
+      )}
       <TotalContainer>
         <p>SUBTOTAL</p>
         <TotalValue>{totalCart}</TotalValue>
@@ -83,11 +109,11 @@ const CartPage = () => {
           </RadioGroup>
         </FormControl>
       </PaymentMethodContainer>
-      <PlaceOrderButton paymentMethod={paymentMethod}/>
+      <PlaceOrderButton paymentMethod={paymentMethod} onClick={() => confirmButton()}/>
+<PedidoEmAndamento trigger={confirm} />
       <Footer />
     </DeviceContainer>
-  )
-}
-
+  );
+};
 
 export default CartPage;

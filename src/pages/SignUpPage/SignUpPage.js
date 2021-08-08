@@ -12,9 +12,9 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 export default function SignUpPage() {
-  const history = useHistory()
-  const token = localStorage.getItem('token')
-  useUnprotectedPage()
+  const history = useHistory();
+  const token = localStorage.getItem("token");
+  useUnprotectedPage();
   const { form, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",
@@ -53,7 +53,7 @@ export default function SignUpPage() {
             type={"text"}
             value={form.name}
             onChange={onChangeForm}
-            autoFocus            
+            autoFocus
             required
           />
 
