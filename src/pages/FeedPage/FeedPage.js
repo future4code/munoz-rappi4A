@@ -4,7 +4,7 @@ import {
   InputAdornment,
   TextField,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
@@ -21,6 +21,8 @@ import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
 import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
+import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
+import GlobalStateContext from "../../global/GlobalStateContext";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -31,12 +33,23 @@ const FeedPage = () => {
   });
   const token = localStorage.getItem("token");
   const { data, loading } = useRequestData("/restaurants", token);
+  const { hasActiveOrder, verifyActiveOrder } = useContext(GlobalStateContext);
+  const [confirm, setConfirm] = useState(hasActiveOrder);
+  console.log(confirm);
+  console.log("É ATIVO", hasActiveOrder);
 
   const searchResult =
     form.search &&
     data.restaurants?.filter((item) => {
       return item.name.toLowerCase().includes(form.search.toLowerCase());
     });
+
+  useEffect(() => {
+    if (data?.order) {
+      setConfirm(true);
+    }
+    verifyActiveOrder();
+  }, [confirm]);
 
   let nameRestaurants =
     form.search && searchResult.length > 0
@@ -67,7 +80,8 @@ const FeedPage = () => {
         filteredTypes[restaurant.category] = [];
         filteredTypes[restaurant.category].push(restaurant);
       }
-
+      console.log("ARRAY TYPES", data.restaurants);
+      console.log("FILTRO", filteredTypes);
       return (
         <ContainerTiposComida
           onClick={() => onClickCategorias(restaurant.category)}
@@ -83,7 +97,6 @@ const FeedPage = () => {
   const onClickCategorias = (selectCategory) => {
     data.restaurants.forEach((restaurant) => {
       if (restaurant.category === selectCategory) {
-
         filteredRestaurants.push(restaurant);
       }
     });
@@ -92,8 +105,7 @@ const FeedPage = () => {
   };
 
   const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
-    return <CardRestaurants key={restaurant.id} restaurant={restaurant} />
-
+    return <CardRestaurants key={restaurant.id} restaurant={restaurant} />;
   });
   return (
     <div>
@@ -125,7 +137,8 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
-      <OrderSuccess />
+      {/* <OrderSuccess /> */}
+      <PedidoEmAndamento trigger={confirm} />
       <Footer />
     </div>
   );

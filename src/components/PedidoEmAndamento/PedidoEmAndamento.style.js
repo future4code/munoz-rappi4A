@@ -15,3 +15,14 @@ export const TitleAndamento = styled.p`
   color: white;
   font-size: 14px;
 `;
+export const ContainerClock = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+`;
+
+export const ClockIcon = styled.img``;
+
+export const ContainerRecado = styled.div`
+  margin-left: 18px;
+`;
