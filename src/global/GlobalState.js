@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import GlobalStateContext from "./GlobalStateContext";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const GlobalState = (props) => {
   const token = localStorage.getItem("token");
@@ -17,16 +19,24 @@ const GlobalState = (props) => {
     const isSameRestaurant = restaurant?.id === selectedRestaurant?.id
 
     if ((cart.length > 0) && !isSameRestaurant) {
-      let confirm = window.confirm('Você deseja limpar o carrinho anterior e adicionar esse item?')
-
-      if (confirm) {
+      Swal.fire({
+      title: "Você deseja limpar o carrinho anterior e adicionar esse item?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `Sim`,
+      denyButtonText: `Não`,
+    }).then((result) => {
+      if (result.isConfirmed) {
         setSelectedRestaurant(restaurant)
-        return setCart([updateProduct])
-      } else {
-        return confirm = false
+        setCart([updateProduct])
+        Swal.fire("Produtos Removidos!");
+      } else if (!result.isConfirmed) {
+        Swal.fire("Seus produtos ainda estão no seu carrinho");
       }
+    });
     }
 
+    
     setSelectedRestaurant(restaurant)
 
     const isInCart = cart.find(productInCart => productInCart.id === product.id)
