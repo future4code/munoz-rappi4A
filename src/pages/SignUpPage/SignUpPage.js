@@ -1,15 +1,14 @@
-import { Button, TextField } from "@material-ui/core";
-import axios from "axios";
-import { BASE_URL } from "../../constants/urls";
-import { useForm } from "../../hooks/useForm";
 import React from "react";
-import { InputsContainer, SignUpPageContainer } from "./styled";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { goToAddressPage, goToLoginPage } from "../../routes/coordinator";
+import { BASE_URL } from "../../constants/urls";
+import { useForm } from "../../hooks/useForm";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 import LogoHeader from "../../components/LogoHeader/LogoHeader"
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { Button, TextField } from "@material-ui/core";
+import { InputsContainer, SignUpPageContainer } from "./style";
 
 export default function SignUpPage() {
   const history = useHistory();

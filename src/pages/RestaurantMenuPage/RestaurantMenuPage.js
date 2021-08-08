@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import GlobalStateContext from "../../global/GlobalStateContext";
 import { useParams } from 'react-router-dom';
 import { CartCard } from '../../components/CartCard/CartCard';
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from '../../hooks/useRequestData';
 import { Header } from '../../components/Header/Header'
 import { Footer } from '../../components/Footer/Footer'
-import { ContainerTiposComida, RestaurantMenu } from './styled';
-import { TiposDeComida } from './styled';
-import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, MenuItem, FormControl, Select } from "@material-ui/core";
 import RestaurantMenuCard from '../../components/RestaurantMenuCard/RestaurantMenuCard';
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, FormControl, Select } from "@material-ui/core";
+import { FoodTypesContainer, RestaurantMenu, FoodTypes } from './style';
 
-import { useContext } from "react";
-import GlobalStateContext from "../../global/GlobalStateContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -93,46 +91,43 @@ const RestaurantMenuPage = () => {
     setQuantity("")
   };
 
-  // const addItemToCart = (id) => {
-  // }
-
   const handleChange = (event) => {
     setQuantity(Number(event.target.value) || "");
   };
 
   const addItemToCart = () => {
-
-    // const product = {
-    //   ...selectedProduct,
-    //   quantity: quantity,
-    //   restaurant: restaurant.id
-    // }
-
     addToCart(selectedProduct, quantity, restaurant)
     handleClose();
   }
 
   return (
     <RestaurantMenu>
-      <Header title={restaurant && restaurant.name} />
-      {restaurant && <RestaurantMenuCard restaurant={restaurant} />}
+      <Header
+        title={restaurant && restaurant.name} showBackBtn={true}
+      />
+      {restaurant && 
+      <RestaurantMenuCard restaurant={restaurant} />
+      }
       {
         restaurant && products ?
           products.map((category) => {
             return (
               <div key={category.name}>
-                {category.products.length > 0 && <ContainerTiposComida><TiposDeComida>{category.name}</TiposDeComida></ContainerTiposComida>}
+                {category.products.length > 0 && <FoodTypesContainer>
+                  <FoodTypes>{category.name}</FoodTypes>
+                </FoodTypesContainer>
+                }
                 {category.products.map((product) => {
                   const isInCart = cart.find(cartProduct => cartProduct.id === product.id)
 
                   return (
-                    <CartCard 
-                    product={product} 
-                    key={product.id} 
-                    actionCartBtn={isInCart ? false : true} 
-                    handleOpen={handleOpen}
-                    cart={cart} 
-                    removeItemFromCart={removeItemFromCart}
+                    <CartCard
+                      product={product}
+                      key={product.id}
+                      actionCartBtn={isInCart ? false : true}
+                      handleOpen={handleOpen}
+                      cart={cart}
+                      removeItemFromCart={removeItemFromCart}
                     />
                   )
                 })}

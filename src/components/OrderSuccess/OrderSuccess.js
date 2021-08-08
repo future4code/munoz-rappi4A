@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { formatPrice } from "../../utils/formatPrice";
+import { useRequestData } from "../../hooks/useRequestData";
 import { AccessTimeOutlinedIcon } from "@material-ui/icons/AccessTimeOutlined";
 import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
-import { useRequestData } from "../../hooks/useRequestData";
-import { formatPrice } from "../../utils/formatPrice";
-import { ContainerOrder, MenuOpenOrder } from "./styled";
+import { ContainerOrder, MenuOpenOrder } from "./style";
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {

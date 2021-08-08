@@ -2,17 +2,10 @@ import React from "react";
 import { Footer } from "../../components/Footer/Footer";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { Header } from "../../components/Header/Header";
-import {
-  Container,
-  makeStyles,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@material-ui/core";
 import CardOrders from "../../components/CardOrders/CardOrders";
 import CardProfile from "../../components/CardProfile/CardProfile";
 import CardAddress from "../../components/CardAddress/CardAddress";
+import { Container, makeStyles, List, ListItem, ListItemText, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   listHistory: {

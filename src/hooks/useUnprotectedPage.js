@@ -1,5 +1,5 @@
-import { useHistory } from "react-router-dom";
 import { useLayoutEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { goToFeedPage } from "../routes/coordinator";
 
 const useUnprotectedPage = () => {

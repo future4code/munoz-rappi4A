@@ -1,22 +1,22 @@
-import { Button, TextField } from "@material-ui/core";
-import axios from "axios";
 import React, { useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { goToProfilePage } from "../../routes/coordinator";
 import { Header } from "../../components/Header/Header";
 import { BASE_URL } from "../../constants/urls";
 import { useForm } from "../../hooks/useForm";
-import { AddressPageContainer, InputsContainer } from "./styled";
-import { useHistory } from "react-router-dom";
-import { goToProfilePage } from "../../routes/coordinator";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { Button, TextField } from "@material-ui/core";
+import { AddressPageContainer, InputsContainer } from "./style";
+
 
 const EditAddressPage = () => {
   useProtectedPage();
   const token = localStorage.getItem("token");
   const history = useHistory();
-  const { data: profile, loading } = useRequestData("/profile/address", token);
+  const { data: profile } = useRequestData("/profile/address", token);
   const { form, setForm, onChangeForm, clearInputs } = useForm({
     street: "",
     number: "",

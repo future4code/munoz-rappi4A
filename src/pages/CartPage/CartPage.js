@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Header } from "../../components/Header/Header";
+import React, { useEffect, useState, useContext } from "react";
+import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
 import FormLabel from "@material-ui/core/FormLabel";
 import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
@@ -27,8 +27,14 @@ import {
   TotalContainer,
   TotalValue,
 } from "./styled";
+
 import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import { DeviceContainer, EmptyCard, PaymentMethodContainer, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './style'
 
 const CartPage = (props) => {
   useProtectedPage();
@@ -79,9 +85,9 @@ const CartPage = (props) => {
 
   return (
     <DeviceContainer>
-      <Header showBackBtn={false} title={"Meu Carrinho"} />
-      <CardAddress showEditBtn={false} />
-      {selectedRestaurant ? (
+      <Header showBackBtn={false} title={'Meu Carrinho'} />
+      <CardAddress showEditBtn={false} onCartPage={true}/>
+      {selectedRestaurant ?
         <>
           <RestaurantDetails>
             <h3>{selectedRestaurant.name}</h3>
@@ -95,7 +101,7 @@ const CartPage = (props) => {
         </>
       ) : (
         <>
-          <p>Carrinho vazio</p>
+          <EmptyCard>Carrinho vazio</EmptyCard>
           <ShippingContainer>
             <p>Frete: {formatPrice(0)}</p>
           </ShippingContainer>

@@ -9,15 +9,18 @@ export const RestaurantMenu = styled.main`
     min-height: 100vh;
     height: fit-content;
     margin-bottom: 10vh;
+    padding: 0 16px;
 `
 
-export const TiposDeComida = styled.p`
-  margin-left: 20px;
+export const FoodTypes = styled.p`
+  width: 100%;
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px;
   text-align: left;
-  color: gray;
+  color: #000;
 `;
 
-export const ContainerTiposComida = styled.div`
+export const FoodTypesContainer = styled.div`
   display: flex;
   align-items: flex-start;
 `;

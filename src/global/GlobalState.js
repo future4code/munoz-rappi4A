@@ -5,6 +5,7 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { useRequestData } from "../hooks/useRequestData";
 
+
 const GlobalState = (props) => {
   const token = localStorage.getItem("token");
   const [logout, setLogout] = useState(token ? "Sair" : "");
@@ -31,16 +32,20 @@ const GlobalState = (props) => {
         denyButtonText: `Não`,
       }).then((result) => {
         if (result.isConfirmed) {
+
           setSelectedRestaurant(restaurant);
           setCart([updateProduct]);
+
           Swal.fire("Produtos Removidos!");
         } else if (!result.isConfirmed) {
           Swal.fire("Seus produtos ainda estão no seu carrinho");
         }
       });
+
     }
 
     setSelectedRestaurant(restaurant);
+
 
     const isInCart = cart.find(
       (productInCart) => productInCart.id === product.id
@@ -56,6 +61,7 @@ const GlobalState = (props) => {
       });
 
       setCart(newCart);
+      
     } else {
       const updateCart = [...cart, updateProduct];
       setCart(updateCart);
