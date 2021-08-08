@@ -20,7 +20,6 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
-import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -115,7 +114,6 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
-      <OrderSuccess />
       <Footer />
     </div>
   );
