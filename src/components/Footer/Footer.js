@@ -21,7 +21,7 @@ export function Footer() {
 
   return (
     <MdlMiniFooter>
-      <FooterContainer class="container">
+      <FooterContainer>
         <ListsIcons>
           <li onClick={() => goToFeedPage(history)}>
             <HouseOutlinedIcon

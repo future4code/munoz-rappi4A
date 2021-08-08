@@ -11,7 +11,6 @@ import Swal from 'sweetalert2'
 import { Button, TextField } from "@material-ui/core";
 import { LoginPageContainer, InputsContainer } from "./style";
 
-
 export default function LoginPage() {
   const history = useHistory();
   const token = localStorage.getItem("token");
