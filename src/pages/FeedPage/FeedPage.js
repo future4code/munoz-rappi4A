@@ -20,6 +20,7 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
+import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -82,19 +83,17 @@ const FeedPage = () => {
   const onClickCategorias = (selectCategory) => {
     data.restaurants.forEach((restaurant) => {
       if (restaurant.category === selectCategory) {
-        // console.log(restaurant);
+
         filteredRestaurants.push(restaurant);
       }
     });
-
-    // console.log(filteredRestaurants);
     setFiltered(true);
     setRestaurantesFiltrados(filteredRestaurants);
   };
-  // console.log(RestaurantesFiltrados);
 
-  const renderRestaurants = RestaurantesFiltrados.map((restaurant, index) => {
-    return <CardRestaurants key={index} restaurant={restaurant} />;
+  const renderRestaurants = RestaurantesFiltrados.map((restaurant) => {
+    return <CardRestaurants key={restaurant.id} restaurant={restaurant} />
+
   });
   return (
     <div>
@@ -126,6 +125,7 @@ const FeedPage = () => {
           </CardActionArea>
         </Container>
       </>
+      <OrderSuccess />
       <Footer />
     </div>
   );

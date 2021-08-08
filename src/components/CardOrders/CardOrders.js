@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRequestData } from "../../hooks/useRequestData";
 import {
   Card,
@@ -35,10 +35,16 @@ const useStyles = makeStyles((theme) => ({
 const CardOrders = () => {
   const classes = useStyles();
   const token = localStorage.getItem("token");
-  const orders = useRequestData("/orders/history", token);
+  const {data, loading} = useRequestData("/orders/history", token);
+  const [orders, setOrders] = useState()
 
+  useEffect(()=>{
+    data &&
+    setOrders(data.orders)
+  }, [data])
+  
   const renderOrders = () => {
-    if (orders.length > 0) {
+    if (!loading && orders.length > 0) {
       return orders.map((item) => {
         return (
           <>
@@ -49,7 +55,7 @@ const CardOrders = () => {
                   component="h2"
                   className={classes.textRestaurant}
                 >
-                  {item.restaurante}
+                  {item.restaurantName}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -63,7 +69,7 @@ const CardOrders = () => {
                   component="h2"
                   className={classes.textPrice}
                 >
-                  SUB-TOTAL R${item.valor.toFixed(2)}
+                  SUB-TOTAL R${item.totalPrice.toFixed(2)}
                 </Typography>{" "}
               </CardContent>
             </Card>
@@ -73,10 +79,10 @@ const CardOrders = () => {
     } else {
       return (
         <ListItem>
-          <ListItemText
+          {!loading && <ListItemText
             primary="Você não realizou nenhum pedido"
             style={{ fontWeight: "bold", color: "black", textAlign: "center" }}
-          />
+          />}
         </ListItem>
       );
     }

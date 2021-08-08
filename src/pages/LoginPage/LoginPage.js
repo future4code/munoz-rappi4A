@@ -8,7 +8,9 @@ import { LoginPageContainer, InputsContainer } from "./styled";
 import { useHistory } from "react-router-dom";
 import { goToFeedPage, goToSignUpPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import LogoHeader from "../../components/LogoHeader/LogoHeader";
+import LogoHeader from "../../components/LogoHeader/LogoHeader"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function LoginPage() {
   const history = useHistory();
@@ -26,13 +28,16 @@ export default function LoginPage() {
       .post(`${BASE_URL}/login`, form)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        // console.log("TOKEN", response.data.token);
         clearInputs();
         goToFeedPage(history);
         setLogout("Sair");
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: (err.response.data.message),
+        })
       });
   };
   return (

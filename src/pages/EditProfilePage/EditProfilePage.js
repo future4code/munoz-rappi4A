@@ -9,6 +9,8 @@ import { Header } from "../../components/Header/Header";
 import { goToProfilePage } from "../../routes/coordinator";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { useRequestData } from "../../hooks/useRequestData";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const EditProfilePage = () => {
   useProtectedPage();
@@ -40,7 +42,11 @@ const EditProfilePage = () => {
         goToProfilePage(history);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: (err.response.data.message),
+        })
       });
   };
 
