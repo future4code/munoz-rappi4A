@@ -1,19 +1,14 @@
-import { Button, TextField } from "@material-ui/core";
-import axios from "axios";
 import React from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom"
 import { Header } from "../../components/Header/Header";
 import { BASE_URL } from "../../constants/urls";
-import { useForm } from "../../hooks/useForm";
-import {
-  AddressPageContainer,
-  InputsContainer,
-  TittleAddress,
-} from "./address.style";
-import { useHistory } from "react-router-dom"
 import { goToLoginPage } from "../../routes/coordinator"
+import { useForm } from "../../hooks/useForm";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { Button, TextField } from "@material-ui/core";
+import { AddressPageContainer, InputsContainer, TittleAddress } from "./style";
 
 
 export default function AddAddressPage() {

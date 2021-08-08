@@ -1,12 +1,6 @@
-import { CardActionArea, Typography } from "@material-ui/core";
 import React from "react";
-import {
-  CardContentStyle,
-  CardMediaStyle,
-  ContainerInfos,
-  NameRestaurant,
-  RestaurantInfos,
-} from "./styled";
+import { CardActionArea, Typography } from "@material-ui/core";
+import { CardContentStyle, CardMediaStyle, ContainerInfos, NameRestaurant, RestaurantInfos } from "./style";
 
 export default function RestaurantMenuCard({ restaurant }) {
   return (

@@ -1,12 +1,11 @@
-import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
+import { useHistory } from "react-router-dom";
+import axios from "axios"
+import { goToFeedPage } from "../../routes/coordinator";
 import { BASE_URL } from "../../constants/urls"
 import GlobalStateContext from "../../global/GlobalStateContext"
-import { ButtonLarge } from "./styled"
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import { useHistory } from "react-router-dom";
-import { goToFeedPage } from "../../routes/coordinator";
+import { ButtonLarge } from "./style"
 
 export default function PlaceOrderButton(props) {
     const history = useHistory();

@@ -1,26 +1,15 @@
-import {
-  CardActionArea,
-  Container,
-  InputAdornment,
-  TextField,
-} from "@material-ui/core";
 import React, { useState } from "react";
+import SearchIcon from '@material-ui/icons/Search';
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
-import {
-  ContainerBusca,
-  ContainerTiposComida,
-  ContainerTodosTipos,
-  SearchIconStyle,
-  TiposDeComida,
-} from "./feedPage.style";
-import searchIcon from "../../assets/search.svg";
 import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
 import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
+import { CardActionArea, InputAdornment } from "@material-ui/core";
+import { SearchContainer, FoodTypeContainer, AllTypeContainer, FoodTypes, SearchField, ContainerStyle } from "./style";
 
 const FeedPage = () => {
   useProtectedPage();
@@ -69,13 +58,13 @@ const FeedPage = () => {
       }
 
       return (
-        <ContainerTiposComida
+        <FoodTypeContainer
           onClick={() => onClickCategorias(restaurant.category)}
         >
-          <TiposDeComida>
+          <FoodTypes>
             <strong>{restaurant.category}</strong>
-          </TiposDeComida>
-        </ContainerTiposComida>
+          </FoodTypes>
+        </FoodTypeContainer>
       );
     });
 
@@ -99,31 +88,34 @@ const FeedPage = () => {
     <div>
       <>
         <Header showBackBtn={false} title={"Rappi4"} />
-        <Container>
-          <ContainerBusca>
-            <TextField
+        <ContainerStyle>
+          <SearchContainer>
+            <SearchField
               id="input-with-icon-textfield"
               placeholder="Restaurantes"
               type="text"
               onChange={onChangeForm}
               value={form.search}
               name={"search"}
+              variant="outlined"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
                 ),
               }}
             />
-            <SearchIconStyle src={searchIcon} />
-          </ContainerBusca>
-          <ContainerTodosTipos>
-            <ContainerTiposComida>{typesOfFood}</ContainerTiposComida>
-          </ContainerTodosTipos>
+            {/* <SearchIconStyle src={searchIcon} /> */}
+          </SearchContainer>
+          <AllTypeContainer>
+            <FoodTypeContainer>{typesOfFood}</FoodTypeContainer>
+          </AllTypeContainer>
           <CardActionArea>
             {loading && <Loading />}
             {filtered ? renderRestaurants : nameRestaurants || listRestaurants}
           </CardActionArea>
-        </Container>
+        </ContainerStyle>
       </>
       <OrderSuccess />
       <Footer />

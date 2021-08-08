@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRequestData } from "../../hooks/useRequestData";
-import {
-  Card,
-  CardContent,
-  Typography,
-  makeStyles,
-  ListItem,
-  ListItemText,
-} from "@material-ui/core";
+import { Card, CardContent, Typography, makeStyles, ListItem, ListItemText } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   containerMain: {

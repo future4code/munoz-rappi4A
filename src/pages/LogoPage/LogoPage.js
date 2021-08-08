@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import logo from "../../assets/logo.svg";
-import { ContainerApp, AppHeader, AppLogo } from "./styled";
 import { useHistory } from "react-router-dom";
 import { goToLoginPage } from "../../routes/coordinator";
+import logo from "../../assets/logo.svg";
 import { CircularProgress } from "@material-ui/core";
+import { ContainerApp, AppHeader, AppLogo } from "./style";
 
 
 const LogoPage = () => {
