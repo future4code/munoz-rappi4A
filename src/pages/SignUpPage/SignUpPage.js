@@ -7,12 +7,12 @@ import { InputsContainer, SignUpPageContainer } from "./styled";
 import { useHistory } from "react-router-dom";
 import { goToAddressPage, goToLoginPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import LogoHeader from "../../components/LogoHeader/LogoHeader"
+import LogoHeader from "../../components/LogoHeader/LogoHeader";
 
 export default function SignUpPage() {
-  const history = useHistory()
-  const token = localStorage.getItem('token')
-  useUnprotectedPage()
+  const history = useHistory();
+  const token = localStorage.getItem("token");
+  useUnprotectedPage();
   const { form, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",
@@ -48,7 +48,7 @@ export default function SignUpPage() {
             type={"text"}
             value={form.name}
             onChange={onChangeForm}
-            autoFocus            
+            autoFocus
             required
           />
 

@@ -8,8 +8,7 @@ import { LoginPageContainer, InputsContainer } from "./styled";
 import { useHistory } from "react-router-dom";
 import { goToFeedPage, goToSignUpPage } from "../../routes/coordinator";
 import useUnprotectedPage from "../../hooks/useUnprotectedPage";
-import LogoHeader from "../../components/LogoHeader/LogoHeader"
-
+import LogoHeader from "../../components/LogoHeader/LogoHeader";
 
 export default function LoginPage() {
   const history = useHistory();
@@ -27,7 +26,7 @@ export default function LoginPage() {
       .post(`${BASE_URL}/login`, form)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        console.log("TOKEN", response.data.token);
+        // console.log("TOKEN", response.data.token);
         clearInputs();
         goToFeedPage(history);
         setLogout("Sair");
