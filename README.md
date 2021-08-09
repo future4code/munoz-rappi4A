@@ -81,3 +81,4 @@ O funcionamento e o layout deste aplicativo pode ser visto nas seguintes imagens
 
 ![profile-page](https://user-images.githubusercontent.com/52436121/128655775-3867aa6c-920d-4eba-ba67-0649e0c9eaca.png)
 
+![image](https://user-images.githubusercontent.com/52436121/128656180-ac8c987b-6a20-4d11-af54-011b1ca9e8b6.png)
