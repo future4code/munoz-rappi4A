@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { goToRestaurantMenuPage } from "../../routes/coordinator";
+import { formatPrice } from "../../utils/formatPrice";
 import { CardContentStyle, CardMediaStyle, ContainerInfos, NameRestaurant, CardActionAreaStyle } from "./style";
 
 export default function CardRestaurants({ restaurant }) {
@@ -25,7 +26,7 @@ export default function CardRestaurants({ restaurant }) {
             {`${restaurant.deliveryTime}min`}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {`Frete R$${restaurant.shipping},00`}
+            {`Frete ${formatPrice(restaurant.shipping)}`}
           </Typography>
         </ContainerInfos>
       </CardContentStyle>

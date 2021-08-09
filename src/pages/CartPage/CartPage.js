@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
-import FormLabel from "@material-ui/core/FormLabel";
-import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
-import { goToFeedPage } from "../../routes/coordinator";
-import { useHistory } from "react-router-dom";
 import CardAddress from "../../components/CardAddress/CardAddress";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from "../../components/CartCard/CartCard";
@@ -20,9 +16,7 @@ import { DeviceContainer, EmptyCard, PaymentMethodContainer, RestaurantDetails, 
 const CartPage = (props) => {
   useProtectedPage();
 
-  const history = useHistory();
-  const [confirm, setConfirm] = useState(false);
-  const { cart, setCart, removeItemFromCart, selectedRestaurant } =
+  const { cart, removeItemFromCart, selectedRestaurant } =
     useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -56,13 +50,6 @@ const CartPage = (props) => {
       />
     );
   });
-
-  const confirmButton = () => {
-    setConfirm(true);
-    setCart([]);
-    // goToFeedPage(history);
-    console.log("FUNCIONOU");
-  };
 
   return (
     <DeviceContainer>

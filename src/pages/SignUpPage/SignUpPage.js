@@ -12,7 +12,6 @@ import { InputsContainer, SignUpPageContainer } from "./style";
 
 export default function SignUpPage() {
   const history = useHistory();
-  const token = localStorage.getItem("token");
   useUnprotectedPage();
   const { form, onChangeForm, clearInputs } = useForm({
     name: "",

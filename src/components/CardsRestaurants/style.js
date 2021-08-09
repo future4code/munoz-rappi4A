@@ -6,21 +6,17 @@ export const CardActionAreaStyle = styled(CardActionArea)`
     border: solid 1px gray;
     border-radius: 8px;
     margin: 10px 0;
-
   }
 `;
 
 export const CardContentStyle = styled(CardContent)`
-  /* border: solid 1px gray; */
   height: 90px;
   border-radius: 0 0 8px 8px;
 `;
 
 export const CardMediaStyle = styled(CardMedia)`
   && {
-    /* margin-top: 20px; */
     height: 120px;
-    /* border: solid 1px gray; */
     border-radius: 8px 8px 0 0;
   }
 `;

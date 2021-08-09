@@ -13,7 +13,6 @@ import { LoginPageContainer, InputsContainer } from "./style";
 
 export default function LoginPage() {
   const history = useHistory();
-  const token = localStorage.getItem("token");
   useUnprotectedPage();
   const { setLogout } = useContext(GlobalStateContext);
   const { form, onChangeForm, clearInputs } = useForm({

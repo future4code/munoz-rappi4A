@@ -29,12 +29,11 @@ const CardProfile = () => {
   const history = useHistory();
   const classes = useStyles();
   const token = localStorage.getItem("token");
-  const { data: profile, loading } = useRequestData("/profile", token);
+  const { data: profile } = useRequestData("/profile", token);
 
   const renderProfile = () => {
     return (
       <div>
-        {loading && <p>Carregando...</p>}
         {profile && (
           <div>
             <CardStyle

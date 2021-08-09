@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import SearchIcon from '@material-ui/icons/Search';
-
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
@@ -25,8 +24,6 @@ const FeedPage = () => {
   const { data, loading } = useRequestData("/restaurants", token);
   const { hasActiveOrder, verifyActiveOrder } = useContext(GlobalStateContext);
   const [confirm, setConfirm] = useState(hasActiveOrder);
-  console.log(confirm);
-  console.log("É ATIVO", hasActiveOrder);
 
   const searchResult =
     form.search &&
@@ -70,8 +67,7 @@ const FeedPage = () => {
         filteredTypes[restaurant.category] = [];
         filteredTypes[restaurant.category].push(restaurant);
       }
-      console.log("ARRAY TYPES", data.restaurants);
-      console.log("FILTRO", filteredTypes);
+
       return (
         <FoodTypeContainer
           onClick={() => onClickCategorias(restaurant.category)}

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ClockIcon,
   ContainerClock,
   ContainerConfirm,
   ContainerRecado,
@@ -8,21 +7,21 @@ import {
 } from "./PedidoEmAndamento.style";
 import Clock from "../../assets/clock.svg";
 import { useRequestData } from "../../hooks/useRequestData";
+import { formatPrice } from "../../utils/formatPrice";
 
 export default function PedidoEmAndamento(props) {
   const token = localStorage.getItem("token");
   const { data } = useRequestData("/active-order", token);
-  console.log(data);
   return props.trigger ? (
     <div>
       <ContainerConfirm>
         <ContainerClock>
-          <ClockIcon src={Clock} alt={"clock"} />
+          <img src={Clock} alt={"clock"} />
         </ContainerClock>
         <ContainerRecado>
           <TitleAndamento>Pedido em andamento</TitleAndamento>
           <p>{data?.order.restaurantName}</p>
-          <h3>{`SUBTOTAL R$${data?.order.totalPrice}`}</h3>
+          <h3>{`SUBTOTAL ${data && formatPrice(data.order.totalPrice)}`}</h3>
         </ContainerRecado>
 
         {props.children}

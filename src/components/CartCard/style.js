@@ -2,10 +2,9 @@ import styled from "styled-components"
 
 
 export const Card = styled.div`
-  /* width: 328px; */
+  width: 85vw;
   height: 112px;
   margin: 4px 0;
-  /* padding: 0 0 0 113px; */
   border-radius: 8px;
   border: solid 1px #b8b8b8;
   overflow: hidden;
