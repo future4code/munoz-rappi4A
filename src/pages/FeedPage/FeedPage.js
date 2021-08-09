@@ -1,12 +1,4 @@
-
-import {
-  CardActionArea,
-  Container,
-  InputAdornment,
-  TextField,
-} from "@material-ui/core";
-import React, { useContext, useEffect } from "react";
-import  { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchIcon from '@material-ui/icons/Search';
 
 import { Footer } from "../../components/Footer/Footer";
@@ -16,7 +8,6 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
-import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { CardActionArea, InputAdornment } from "@material-ui/core";
@@ -128,7 +119,6 @@ const FeedPage = () => {
                 ),
               }}
             />
-            {/* <SearchIconStyle src={searchIcon} /> */}
           </SearchContainer>
           <AllTypeContainer>
             <FoodTypeContainer>{typesOfFood}</FoodTypeContainer>
@@ -139,7 +129,6 @@ const FeedPage = () => {
           </CardActionArea>
         </ContainerStyle>
       </>
-      {/* <OrderSuccess /> */}
       <PedidoEmAndamento trigger={confirm} />
       <Footer />
     </div>

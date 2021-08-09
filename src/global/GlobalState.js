@@ -41,7 +41,7 @@ const GlobalState = (props) => {
           Swal.fire("Seus produtos ainda estão no seu carrinho");
         }
       });
-
+      return
     }
 
     setSelectedRestaurant(restaurant);
