@@ -1,14 +1,5 @@
-
-import {
-  CardActionArea,
-  Container,
-  InputAdornment,
-  TextField,
-} from "@material-ui/core";
-import React, { useContext, useEffect } from "react";
-import  { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchIcon from '@material-ui/icons/Search';
-
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import useProtectedPage from "../../hooks/useProtectedPage";
@@ -16,7 +7,6 @@ import { useRequestData } from "../../hooks/useRequestData";
 import { useForm } from "../../hooks/useForm";
 import CardRestaurants from "../../components/CardsRestaurants/CardRestaurants";
 import Loading from "../../components/Loading/Loading";
-import OrderSuccess from "../../components/OrderSuccess/OrderSuccess";
 import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { CardActionArea, InputAdornment } from "@material-ui/core";
@@ -34,8 +24,6 @@ const FeedPage = () => {
   const { data, loading } = useRequestData("/restaurants", token);
   const { hasActiveOrder, verifyActiveOrder } = useContext(GlobalStateContext);
   const [confirm, setConfirm] = useState(hasActiveOrder);
-  console.log(confirm);
-  console.log("É ATIVO", hasActiveOrder);
 
   const searchResult =
     form.search &&
@@ -79,8 +67,7 @@ const FeedPage = () => {
         filteredTypes[restaurant.category] = [];
         filteredTypes[restaurant.category].push(restaurant);
       }
-      console.log("ARRAY TYPES", data.restaurants);
-      console.log("FILTRO", filteredTypes);
+
       return (
         <FoodTypeContainer
           onClick={() => onClickCategorias(restaurant.category)}
@@ -128,7 +115,6 @@ const FeedPage = () => {
                 ),
               }}
             />
-            {/* <SearchIconStyle src={searchIcon} /> */}
           </SearchContainer>
           <AllTypeContainer>
             <FoodTypeContainer>{typesOfFood}</FoodTypeContainer>
@@ -139,7 +125,6 @@ const FeedPage = () => {
           </CardActionArea>
         </ContainerStyle>
       </>
-      {/* <OrderSuccess /> */}
       <PedidoEmAndamento trigger={confirm} />
       <Footer />
     </div>

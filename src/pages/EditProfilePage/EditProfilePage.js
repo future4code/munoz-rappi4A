@@ -15,7 +15,7 @@ const EditProfilePage = () => {
   useProtectedPage();
   const history = useHistory();
   const token = localStorage.getItem("token");
-  const { data: profile, loading } = useRequestData("/profile", token);
+  const { data: profile} = useRequestData("/profile", token);
   const { form, setForm, onChangeForm, clearInputs } = useForm({
     name: "",
     email: "",

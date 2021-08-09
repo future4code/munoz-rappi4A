@@ -21,8 +21,6 @@ export const ContainerClock = styled.div`
   margin-left: 10px;
 `;
 
-export const ClockIcon = styled.img``;
-
 export const ContainerRecado = styled.div`
   margin-left: 18px;
 `;

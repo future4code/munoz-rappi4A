@@ -1,11 +1,10 @@
 
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { ButtonLarge } from "./styled";
+import { ButtonLarge } from "./style";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useHistory } from "react-router-dom";
 import { goToFeedPage } from "../../routes/coordinator";
 

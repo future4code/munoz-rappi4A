@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import GlobalStateContext from "./GlobalStateContext";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import axios from "axios";
 import { useRequestData } from "../hooks/useRequestData";
 
 
@@ -13,7 +11,6 @@ const GlobalState = (props) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(undefined);
   const [hasActiveOrder, setHasActiveOrder] = useState(false);
   const orderData = useRequestData("/active-order", token);
-  console.log("OrderData", orderData.data?.order);
 
   const addToCart = (product, quantity, restaurant = null) => {
     const updateProduct = {
@@ -41,7 +38,7 @@ const GlobalState = (props) => {
           Swal.fire("Seus produtos ainda estão no seu carrinho");
         }
       });
-
+      return
     }
 
     setSelectedRestaurant(restaurant);
@@ -83,13 +80,9 @@ const GlobalState = (props) => {
 
   const verifyActiveOrder = () => {
     setHasActiveOrder(true);
-    if (orderData.data?.order) setHasActiveOrder(true);
-    console.log("SETOU TRUE", hasActiveOrder);
     if (!orderData.data?.order) {
       setHasActiveOrder(false);
-      console.log("SETOU FALSE", hasActiveOrder);
     }
-    console.log("FUNCIONOU", hasActiveOrder);
   };
 
   const data = {

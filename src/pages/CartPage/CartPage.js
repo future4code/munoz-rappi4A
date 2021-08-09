@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Header } from '../../components/Header/Header';
 import { Footer } from "../../components/Footer/Footer";
-import FormLabel from "@material-ui/core/FormLabel";
-import PedidoEmAndamento from "../../components/PedidoEmAndamento/PedidoEmAndamento";
-import { goToFeedPage } from "../../routes/coordinator";
-import { useHistory } from "react-router-dom";
 import CardAddress from "../../components/CardAddress/CardAddress";
 import useProtectedPage from "../../hooks/useProtectedPage";
 import { CartCard } from "../../components/CartCard/CartCard";
@@ -12,36 +8,15 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import {
-  ButtonLarge,
-  DeviceContainer,
-  ImageContainer,
-  InfoBox,
-  PaymentMethodContainer,
-  QuantityBox,
-  RemoveButton,
-  RestaurantDetails,
-  ShippingContainer,
-  TotalContainer,
-  TotalValue,
-} from "./styled";
-
 import { formatPrice } from "../../utils/formatPrice";
 import PlaceOrderButton from "./PlaceOrderButton";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import { DeviceContainer, EmptyCard, PaymentMethodContainer, RestaurantDetails, ShippingContainer, TotalContainer, TotalValue } from './style'
 
 const CartPage = (props) => {
   useProtectedPage();
 
-  const history = useHistory();
-  const [confirm, setConfirm] = useState(false);
-  const { cart, setCart, removeItemFromCart, selectedRestaurant } =
+  const { cart, removeItemFromCart, selectedRestaurant } =
     useContext(GlobalStateContext);
   const [totalCart, setTotalCart] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -76,13 +51,6 @@ const CartPage = (props) => {
     );
   });
 
-  const confirmButton = () => {
-    setConfirm(true);
-    setCart([]);
-    // goToFeedPage(history);
-    console.log("FUNCIONOU");
-  };
-
   return (
     <DeviceContainer>
       <Header showBackBtn={false} title={'Meu Carrinho'} />
@@ -99,14 +67,14 @@ const CartPage = (props) => {
             <p>Frete: {formatPrice(selectedRestaurant.shipping)}</p>
           </ShippingContainer>
         </>
-      ) : (
+       : 
         <>
           <EmptyCard>Carrinho vazio</EmptyCard>
           <ShippingContainer>
             <p>Frete: {formatPrice(0)}</p>
           </ShippingContainer>
         </>
-      )}
+      }
       <TotalContainer>
         <p>SUBTOTAL</p>
         <TotalValue>{totalCart}</TotalValue>

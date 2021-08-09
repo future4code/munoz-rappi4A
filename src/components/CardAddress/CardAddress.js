@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(12, 1fr)",
     borderShadow: "white",
-    // margin: "8px",
     backgroundColor: "#EEEEEE",
   },
   icon: {
